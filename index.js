@@ -2,11 +2,20 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+
+import defaultReducer from './src/reducers/';
 
 // Components
-import App from './src/components/App';
+import AppContainer from './src/containers/AppContainer';
 
 // CSS
 import './style.scss';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = createStore(defaultReducer);
+
+ReactDOM.render(
+	<Provider store={store}>
+		<AppContainer />
+	</Provider>, document.getElementById('root'));

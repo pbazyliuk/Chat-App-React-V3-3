@@ -2,7 +2,7 @@
 module.exports = {
   // context: __dirname + "/build",
   entry: './index.js',
-  
+  devtool: 'source-map',
   output: {
     // path: 'build',
     //path: __dirname + "/build",
@@ -14,11 +14,26 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['react-hot-loader', 'babel-loader'] 
+        loaders: ['react-hot-loader', 'babel-loader', 'eslint-loader'] 
       },
       {
         test: /\.scss$/,
-        loader: 'style-loader!css-loader!sass-loader' 
+        use: [
+          {
+            loader: 'style-loader' // creates style nodes from JS strings
+          },
+          {
+            loader: 'css-loader', // translates CSS into CommonJS
+            query: {
+              modules: true,
+              camelCase: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          },
+          {
+            loader: 'sass-loader', // compiles Sass to CSS
+          }
+        ]
       }
     ]
   }
