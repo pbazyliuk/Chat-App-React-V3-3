@@ -4,7 +4,7 @@ module.exports = {
   entry: './index.js',
   
   output: {
-    path: 'build',
+    // path: 'build',
     //path: __dirname + "/build",
     filename: 'bundle.js'
   },
@@ -14,7 +14,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel-loader'] 
+        loaders: ['react-hot-loader', 'babel-loader'] 
       },
       {
         test: /\.scss$/,
