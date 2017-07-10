@@ -1,10 +1,16 @@
 // Libs
-import React, { Component } from 'react';
+
+//@flow
+import React, { Component } from "react";
 
 
 
-class App extends React.Component {
+  class App extends React.Component {
   
+  handle(n: number): string {
+    return n + '';
+  }
+
   render() {
     return (
       <div className="scoreboard">
