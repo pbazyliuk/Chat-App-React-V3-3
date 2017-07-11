@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 
 import * as actionCreators from '../actions/index';
 
-import styles from './app.scss';
+// import styles from './app.scss';
 
 class App extends React.Component {
 	constructor(props) {
@@ -17,7 +17,7 @@ class App extends React.Component {
 		this.handleSomething = this.handleSomething.bind(this)
 	}
 
-	handleSomething() {
+	handleSomething(): void {
 		var a = Object.assign({}, this.props.data);
 		a.isShown = a.isShown === true ? false : true;
 		this.props.func(a.isShown);

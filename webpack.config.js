@@ -2,10 +2,14 @@
 module.exports = {
   // context: __dirname + "/build",
   entry: './index.js',
-  devtool: 'source-map',
+  // devtool: 'source-map',
+  devServer: {
+    historyApiFallback: true
+  },
   output: {
     // path: 'build',
     //path: __dirname + "/build",
+    
     filename: 'bundle.js'
   },
   
@@ -32,6 +36,17 @@ module.exports = {
           },
           {
             loader: 'sass-loader', // compiles Sass to CSS
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
           }
         ]
       }

@@ -1,5 +1,13 @@
-$primary-color: #333;
 
-h1 {
-  color: $primary-color;
+body {  
+    margin: 0;
+    padding: 0;
+    background: rgb(240,240,240);
+    font-family: 'Open Sans', Arial, 'sans-serif'; 
+    font-style: normal;
+    font-size: 14px;
+}
+
+input:focus, [contenteditable="true"] {
+    outline: none;
 }
