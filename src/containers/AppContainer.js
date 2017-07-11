@@ -14,7 +14,7 @@ class AppContainer extends React.Component {
 		const { dispatch, state } = this.props;
 		const defaultAction = bindActionCreators(actionCreators.defaultAction, dispatch);
 		return (
-			<App data={this.props} func={defaultAction}/>
+			<App data={state} func={defaultAction}/>
 		);
 	}
 }
