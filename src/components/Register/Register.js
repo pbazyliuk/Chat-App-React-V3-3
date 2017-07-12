@@ -2,13 +2,103 @@
 
 import React from 'react';
 
+import { Field, reduxForm } from 'redux-form';
+
 import styles from './Register.scss';
 
-class Register extends React.Component {
-	render() {
+const validate = (values) => {
+	console.error(values)
+	const errors = {};
+
+	if(!values.firstname) {
+
+		errors.firstname = 'Firstname is required'
+	} else if (values.firstname.length < 3) {
+    errors.firstname = 'Must be at least 3 characters'
+  } else if (values.firstname.length > 15) {
+    errors.firstname = 'Must be less than 15 characters'
+  }
+
+	if(!values.lastname) {
+
+		errors.lastname = 'Lastname is required'
+	} else if (values.firstname.length < 3) {
+    errors.lastname = 'Must be at least 3 characters'
+  } else if (values.firstname.length > 15) {
+    errors.lastname = 'Must be less than 15 characters'
+  }
+
+	if(!values.email) {
+		// const inputLength = 6
+		// console.error(values.email);
+		// errors.email = minLength(15)(values.email);
+		errors.email = 'Email is required'
+	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address'
+  }	else if (values.email.length > 30) {
+    errors.email = 'Must be 30 characters or less'
+  }
+
+	if(!values.password) {
+		// const inputLength = 6
+		// console.error(values.email);
+		// errors.email = minLength(15)(values.email);
+		errors.password = 'Password is required'
+	} else if (values.password.length < 6) {
+    errors.password = 'Must be at least 6 characters'
+  }
+
+	if(!values.passwordConfirm) {
+		// const inputLength = 6
+		// console.error(values.email);
+		// errors.email = minLength(15)(values.email);
+		errors.passwordConfirm = 'Password is required'
+	} 	else if (values.password !== values.passwordConfirm) {
+    errors.passwordConfirm = 'Passwords must match'
+  }
+	
+		else if (values.passwordConfirm.length < 6) {
+    errors.passwordConfirm = 'Must be at least 6 characters'
+  }
+
+	return errors;
+}
+
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error, warning  },
+	className
+}) => {
+	
+return <div>
+    <label>
+      {label}
+    </label>
+    <div>
+      <input {...input} placeholder={label} type={type} className={className} />
+      {touched &&
+        ((error &&
+          <div className={styles['text-has-error']}>
+            {error}
+          </div>) ||
+          (warning &&
+            <span>
+              {warning}
+            </span>))}
+    </div>
+  </div>
+}
+
+let Register = props =>  {
+
+		const { handleSubmit, valid, pristine } = props;
+		console.error(valid);
+
 		return (
 			<div className={ styles['form__wrapper'] } >
-				<form action='' className={ styles['form-sign-up'] } >
+				<form action='' className={ styles['form-sign-up'] } onSubmit={ handleSubmit }>
 					<h3 className={ styles['form-sign-up__header'] } >Sign Up</h3>
 
 					<div className={ styles['form-sign-up__container'] } >
@@ -19,8 +109,9 @@ class Register extends React.Component {
 								id='firstnameLabel'>
 								Firstname
 							</label>
-							<input
+							<Field
 								id='firstnameId'
+								component={renderField} 
 								className={ styles['form-sign-up__input-field'] } 
 								type='text'
 								name='firstname'
@@ -36,11 +127,13 @@ class Register extends React.Component {
 							>
 							Lastname
 							</label>
-							<input
+							<Field
 								id='lastnameId'
+								component={renderField} 
 								className={ styles['form-sign-up__input-field'] } 
 								name='lastname'
 								type='text'
+								component={renderField} 
 								placeholder='Last Name (required)'
 							/>
 						</div>
@@ -54,8 +147,9 @@ class Register extends React.Component {
 						>
 						Email
 						</label>
-						<input
+						<Field
 							id='emailId'
+							component={renderField} 
 							className={ styles['form-sign-up__input-field'] } 
 							type='text'
 							name='email'
@@ -72,8 +166,9 @@ class Register extends React.Component {
 							>
 							Password
 							</label>
-							<input
+							<Field
 								id='passwordId'
+								component={renderField} 
 								className={ styles['form-sign-up__input-field'] } 
 								type='password'
 								name='password'
@@ -89,7 +184,8 @@ class Register extends React.Component {
 							>
 							Confirm Password
 							</label>
-							<input
+							<Field
+								component={renderField} 
 								id='confirmpasswordId'
 								className={ styles['form-sign-up__input-field'] } 
 								type='password'
@@ -99,13 +195,17 @@ class Register extends React.Component {
 						</div>
 					</div>
 					
-					<button type='submit' className={ styles['form-sign-up__btn-register'] } >
+					<button type='submit' disabled={ !valid } className={ styles['form-sign-up__btn-register'] } >
 					Get Started
 					</button>
 				</form>
 			</div>
 		);
-	}
 }
+
+Register = reduxForm({
+	form: 'register',
+	validate
+})(Register)
 
 export default Register;
