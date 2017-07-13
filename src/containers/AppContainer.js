@@ -13,10 +13,10 @@ import App from '../components/App';
 import Navbar from '../components/Navbar/Navbar';
 
 import Home from '../components/Home/Home';
-import Chat from '../components/Chat/Chat';
+import Chats from '../components/Chats/Chats';
 // import Login from '../components/Login/Login';
 import PageNotFound from '../components/PageNotFound/PageNotFound';
-import AuthContainer from './AuthContainer/AuthContainer';
+import AuthContainer from './AuthContainer';
 
 class AppContainer extends React.Component {
 	render() {
@@ -29,10 +29,13 @@ class AppContainer extends React.Component {
 					<Navbar />
 					<Switch>
 						<Route exact path="/" component={ Home } />
-						<Route exact path="/chat" component={ Chat } />
+						<Route exact path="/chat" render={() => 
+							<Chats data={this.state} />
+						} />
+					
 						<Route path="/auth" component={ AuthContainer } />
-						
-						<Route component={ PageNotFound } />											
+		
+						<Route path='/:params' component={PageNotFound} />										
 					</Switch>
 				</div>
 			</BrowserRouter>

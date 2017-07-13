@@ -10,9 +10,6 @@ function validate(values) {
 	const errors = {};
 
 	if(!values.email) {
-		// const inputLength = 6
-		// console.error(values.email);
-		// errors.email = minLength(15)(values.email);
 		errors.email = 'Required'
 	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address'
@@ -28,26 +25,22 @@ function validate(values) {
 
 	return errors;
 }
-
-// const required = value => (value ? undefined : 'Required')
-// const minLength = min => value =>{
-// 	return value && value.length < min ? `Must be ${min} characters or more` : undefined
-// }
   
 const renderField = ({
   input,
   label,
   type,
   meta: { touched, error, warning  },
-	className
+	className,
+	placeholder
 }) => {
-	
+
 return <div>
     <label>
       {label}
     </label>
     <div>
-      <input {...input} placeholder={label} type={type} className={className} />
+      <input {...input} placeholder={placeholder} type={type} className={className} />
       {touched &&
         ((error &&
           <div className={styles['text-has-error']}>
@@ -64,7 +57,7 @@ return <div>
 
 let Login = props =>  {
 	const { handleSubmit, valid, pristine } = props;
-	console.error(valid);
+
 
 	return (
 		<div className={ styles['form__wrapper'] } >

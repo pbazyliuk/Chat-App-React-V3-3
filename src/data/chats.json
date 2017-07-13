@@ -1,0 +1,18 @@
+{
+    "chats": [
+        {
+            "id": 1,
+            "name": "Chatting here",
+            "attendees": [1, 2],
+            "creator": 1,
+            "createdAt": "10 min"
+        },
+        {
+            "id": 2,
+            "name": "Cool chat",
+            "attendees": [3, 4],
+            "creator": 3,
+            "createdAt": "20 min"
+        }
+    ]
+}

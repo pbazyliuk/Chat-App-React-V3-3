@@ -9,10 +9,8 @@ import { bindActionCreators } from 'redux';
 
 // import * as actionCreators from '../actions/index';
 
-import Login from '../../components/Login/Login';
-
-import LoginContainer from '../LoginContainer';
-import Register from '../../components/Register/Register';
+import Login from '../components/Login/Login';
+import Register from '../components/Register/Register';
 
 class AuthContainer extends React.Component {
 	constructor(props) {
@@ -26,8 +24,7 @@ class AuthContainer extends React.Component {
 
 	render() {
 		let { match } = this.props;
-		// const { dispatch, state } = this.props;
-		// const defaultAction = bindActionCreators(actionCreators.defaultAction, dispatch);
+
 		return (
 			<div>
 				<Route exact path={match.path} 	
@@ -37,9 +34,13 @@ class AuthContainer extends React.Component {
 								<Login onSubmit={this.submit}/>>
 							</div> ) } } />
 				
-				<Route path={`${this.props.match.url}/login`} component={ LoginContainer } />
+				<Route path={`${this.props.match.url}/login`} 
+					render={() => { 
+						return ( 
+						<div>
+							<Login onSubmit={this.submit}/>>
+						</div> ) } } />
       	<Route path={`${this.props.match.url}/register`} 
-				
 					render={() => { 
 						return ( 
 						<div>

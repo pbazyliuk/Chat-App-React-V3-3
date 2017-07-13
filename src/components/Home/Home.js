@@ -1,7 +1,7 @@
 // Libs
 
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import styles from './Home.scss';
 
 class Home extends React.Component {
@@ -76,7 +76,7 @@ class Home extends React.Component {
 					<span className='wrap'></span>
 				</div>
 				<p className={ styles['home__description'] }>Free real-time chat application</p>
-				<a className={ styles['home__btn-register'] } >Register</a>
+				<Link to="/auth/register" className={ styles['home__btn-register'] } >Register</Link>
 			</div>
 		)
 	}

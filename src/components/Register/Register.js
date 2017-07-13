@@ -7,7 +7,6 @@ import { Field, reduxForm } from 'redux-form';
 import styles from './Register.scss';
 
 const validate = (values) => {
-	console.error(values)
 	const errors = {};
 
 	if(!values.firstname) {
@@ -20,7 +19,6 @@ const validate = (values) => {
   }
 
 	if(!values.lastname) {
-
 		errors.lastname = 'Lastname is required'
 	} else if (values.firstname.length < 3) {
     errors.lastname = 'Must be at least 3 characters'
@@ -29,9 +27,6 @@ const validate = (values) => {
   }
 
 	if(!values.email) {
-		// const inputLength = 6
-		// console.error(values.email);
-		// errors.email = minLength(15)(values.email);
 		errors.email = 'Email is required'
 	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address'
@@ -40,18 +35,12 @@ const validate = (values) => {
   }
 
 	if(!values.password) {
-		// const inputLength = 6
-		// console.error(values.email);
-		// errors.email = minLength(15)(values.email);
 		errors.password = 'Password is required'
 	} else if (values.password.length < 6) {
     errors.password = 'Must be at least 6 characters'
   }
 
 	if(!values.passwordConfirm) {
-		// const inputLength = 6
-		// console.error(values.email);
-		// errors.email = minLength(15)(values.email);
 		errors.passwordConfirm = 'Password is required'
 	} 	else if (values.password !== values.passwordConfirm) {
     errors.passwordConfirm = 'Passwords must match'
@@ -69,7 +58,8 @@ const renderField = ({
   label,
   type,
   meta: { touched, error, warning  },
-	className
+	className,
+	placeholder
 }) => {
 	
 return <div>
@@ -77,7 +67,7 @@ return <div>
       {label}
     </label>
     <div>
-      <input {...input} placeholder={label} type={type} className={className} />
+      <input {...input} placeholder={placeholder} type={type} className={className} />
       {touched &&
         ((error &&
           <div className={styles['text-has-error']}>
@@ -94,7 +84,6 @@ return <div>
 let Register = props =>  {
 
 		const { handleSubmit, valid, pristine } = props;
-		console.error(valid);
 
 		return (
 			<div className={ styles['form__wrapper'] } >
