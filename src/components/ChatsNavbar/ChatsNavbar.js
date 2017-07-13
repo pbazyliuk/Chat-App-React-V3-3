@@ -21,6 +21,7 @@ class ChatsNavbar extends React.Component {
   }
 
   render () {
+
     const isVisible = {
       display: 'none'
     }
@@ -35,7 +36,7 @@ class ChatsNavbar extends React.Component {
     }
 
     const disabled = {
-      pointerEvents: 'none'
+      pointerEvents: 'none',
     }
 
     return (
@@ -43,7 +44,7 @@ class ChatsNavbar extends React.Component {
         <span onClick={this.handleSizeChange} className={ styles['chat-navbar__btn-left-arrow']} style={(!this.props.data.isMenuShown) ? ((this.props.data.isToggleOn) ? rotated : {}) : disabled} />
 
         <form action='' className={ styles['search-form']} style={this.props.data.isToggleOn ? isVisible : {}}>
-          <input className={ styles['search-form__input']} type='text' placeholder='Search' name='search-field' />
+          <input className={ styles['search-form__input']} type='text' placeholder='Search User/Chat' name='search-field' />
           <span className={ styles['search-form__btn-search']} />
         </form>
 

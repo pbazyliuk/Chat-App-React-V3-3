@@ -10,6 +10,10 @@
     list-style: none;
 }
 
+.chat-list__link {
+    text-decoration: none;
+}
+
 .chat-list__item:hover {
     background-color: mediumpurple;
     cursor: pointer;

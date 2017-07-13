@@ -8,10 +8,10 @@ class ChatsItem extends React.Component {
   render () {
     const { id, name, createdAt } = this.props.chat
     return (
-      <Link to={`/chat/${id}`}>
+      <Link  to={`/chat/${id}`}className={styles ['chat-list__link']}>
         <li className={styles ['chat-list__item']} >
           <div className={styles ['avatar']} >
-            <img className={styles ['avatar__img']} src='http://placehold.it/60x60' alt='avatar-image' />
+            <img className={styles ['avatar__img']} src='../../../images/user-off-avatar.png' alt='avatar-image' />
           </div>
           <div className={styles ['chat-info']} >
             <h4 className={styles ['chat-name__heading']} >{name}</h4>

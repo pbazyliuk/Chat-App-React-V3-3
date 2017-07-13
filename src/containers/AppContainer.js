@@ -29,7 +29,7 @@ class AppContainer extends React.Component {
 					<Navbar />
 					<Switch>
 						<Route exact path="/" component={ Home } />
-						<Route exact path="/chat" render={() => 
+						<Route path="/chat" render={() => 
 							<Chats data={this.state} />
 						} />
 					

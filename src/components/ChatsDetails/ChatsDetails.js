@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ChatsDetailsNavbar from '../ChatsDetailsNavbar/ChatsDetailsNavbar'
+import MessagesNavbar from '../MessagesNavbar/MessagesNavbar'
 import MessagesList from '../MessagesList/MessagesList'
 import MessagesInput from '../MessagesInput/MessagesInput'
 import ChatsHolder from '../ChatsHolder/ChatsHolder'
@@ -17,7 +17,13 @@ class ChatsDetails extends React.Component {
     return (
       <div>
         <Route exact path='/chat' component={ChatsHolder} />
-        <Route path='/chat/:id' component={ChatsDetailsNavbar}
+        <Route path='/chat/:id' render={({match}) => (
+          <div>
+            <MessagesNavbar />
+            <MessagesList id={match.params.id} /> 
+            <MessagesInput /> 
+          </div>
+        )} 
         />
       </div>
     )

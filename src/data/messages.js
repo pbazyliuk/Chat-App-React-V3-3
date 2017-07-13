@@ -1,11 +1,11 @@
-import * as moment from 'moment'
+import moment from 'moment'
 
 const MESSAGES = [
   {
     'id': 1,
     'senderId': 1,
     'isRead': true,
-    'sentAt': '10:45',
+    'sentAt': moment().subtract(45, 'minutes').toDate(),
     'text': 'Hello!',
     'chatId': 1
   },
@@ -13,7 +13,7 @@ const MESSAGES = [
     'id': 2,
     'senderId': 1,
     'isRead': true,
-    'sentAt': '10:45',
+    'sentAt': moment().subtract(20, 'minutes').toDate(),
     'text': 'How are you?',
     'chatId': 1
   },
@@ -21,7 +21,7 @@ const MESSAGES = [
     'id': 3,
     'senderId': 2,
     'isRead': true,
-    'sentAt': '10:45',
+    'sentAt': moment().subtract(30, 'minutes').toDate(),
     'text': 'Hi man!',
     'chatId': 1
   },
@@ -29,7 +29,7 @@ const MESSAGES = [
     'id': 4,
     'senderId': 2,
     'isRead': true,
-    'sentAt': '10:45',
+    'sentAt': moment().subtract(15, 'minutes').toDate(),
     'text': 'I\'m fine, thanks!',
     'chatId': 1
   },
@@ -37,7 +37,7 @@ const MESSAGES = [
     'id': 5,
     'senderId': 3,
     'isRead': true,
-    'sentAt': '10:45',
+    'sentAt': moment().subtract(5, 'minutes').toDate(),
     'text': 'I\'ll wait you near street at 5 o\'clock',
     'chatId': 2
   },
@@ -45,7 +45,7 @@ const MESSAGES = [
     'id': 6,
     'senderId': 4,
     'isRead': true,
-    'sentAt': '10:45',
+    'sentAt': moment().subtract(3, 'minutes').toDate(),
     'text': 'Ok, I will be here in 20 minutes!',
     'chatId': 2
   }

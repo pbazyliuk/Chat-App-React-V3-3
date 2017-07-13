@@ -1,13 +1,17 @@
 import React from 'react'
 
-class MessageInput extends React.Component {
+import styles from './MessagesInput.scss'
+
+class MessagesInput extends React.Component {
   render () {
     return (
-      <div className='message-input' contentEditable='true' suppressContentEditableWarning>
-        Type Something...
+      <div className={ styles['message-input-container']} >
+        <input className={ styles['message-input']}
+          placeholder='Input your message'/>
+        <button className={ styles['message-btn-submit']}>Send</button>
       </div>
     )
   }
 }
 
-export default MessageInput
+export default MessagesInput

@@ -30,6 +30,8 @@
     border-radius: 15px;
     height: 32px;
     padding: 0 35px 0 15px;
+    width: 140px;
+    color: #3b3e99;
     
 }
 
@@ -39,7 +41,7 @@
     font-size: 16px;
     position: absolute;
     right: 15px;
-    top: 5px;
+    top: 6px;
     color: #fff;
     cursor: pointer;
 }
@@ -55,7 +57,7 @@
 .chat-navbar__btn-close:before {
     content: "\f00d";
     font-family: FontAwesome;
-    font-size: 22px;
+    font-size: 24px;
     color: #fff;
     cursor: pointer;
 }
@@ -71,6 +73,7 @@
 }
 
 .disabled {
-    pointer-events: none;
-    /*cursor: not-allowed; */
+    //pointer-events: none;
+    // cursor: not-allowed;
 }
+

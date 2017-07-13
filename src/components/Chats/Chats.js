@@ -9,7 +9,12 @@ import styles from './Chats.scss';
 class Chats extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {isToggleOn: false, isMenuShown: false}
+
+    this.state = {
+      isToggleOn: false,
+      isMenuShown: false
+    }
+
     this.handleSizeChange = this.handleSizeChange.bind(this)
     this.handleMenuShow = this.handleMenuShow.bind(this)
   }
@@ -27,6 +32,7 @@ class Chats extends React.Component {
   }
 
   render () {
+
     const collapseWidth = {
       width: '108px',
       overflow: 'hidden'
@@ -35,15 +41,16 @@ class Chats extends React.Component {
     const expandWidth = {
       width: 'calc(100% - 108px)'
     }
+
     return (
       <div className={styles['wrapper']}>
         <aside className={styles['aside-part']} style={this.state.isToggleOn ? collapseWidth : {}}>
           <ChatsNavbar onSizeChange={this.handleSizeChange} onMenuShow={this.handleMenuShow} data={this.state} />
           <ChatsMenu data={this.state} />
-          <ChatsList data={this.state} />
+          <ChatsList data={this.state} />  
         </aside>
         <div className={styles['main-part']} style={this.state.isToggleOn ? expandWidth : {}}>
-          <ChatsDetails />
+          <ChatsDetails /> 
         </div>
       </div>
     )
