@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 class ChatsHolder extends React.Component {
-  render () {
-    return (
-      <h3>Welcome to our ChatsHolder</h3>
-    )
-  }
+	render() {
+		return <h3>Welcome to our ChatsHolder</h3>;
+	}
 }
 
-export default ChatsHolder
+export default ChatsHolder;

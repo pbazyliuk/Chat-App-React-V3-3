@@ -28,14 +28,12 @@ class AppContainer extends React.Component {
 				<div>
 					<Navbar />
 					<Switch>
-						<Route exact path="/" component={ Home } />
-						<Route path="/chat" render={() => 
-							<Chats data={this.state} />
-						} />
-					
-						<Route path="/auth" component={ AuthContainer } />
-		
-						<Route path='/:params' component={PageNotFound} />										
+						<Route exact path="/" component={Home} />
+						<Route path="/chat" render={() => <Chats data={this.state} />} />
+
+						<Route path="/auth" component={AuthContainer} />
+
+						<Route path="/:params" component={PageNotFound} />
 					</Switch>
 				</div>
 			</BrowserRouter>

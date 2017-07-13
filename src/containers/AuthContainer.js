@@ -15,11 +15,10 @@ import Register from '../components/Register/Register';
 class AuthContainer extends React.Component {
 	constructor(props) {
 		super(props);
-
 	}
 
 	submit(values) {
-		console.log(values)
+		console.log(values);
 	}
 
 	render() {
@@ -27,25 +26,38 @@ class AuthContainer extends React.Component {
 
 		return (
 			<div>
-				<Route exact path={match.path} 	
-					render={() => { 
-							return ( 
+				<Route
+					exact
+					path={match.path}
+					render={() => {
+						return (
 							<div>
-								<Login onSubmit={this.submit}/>>
-							</div> ) } } />
-				
-				<Route path={`${this.props.match.url}/login`} 
-					render={() => { 
-						return ( 
-						<div>
-							<Login onSubmit={this.submit}/>>
-						</div> ) } } />
-      	<Route path={`${this.props.match.url}/register`} 
-					render={() => { 
-						return ( 
-						<div>
-							<Register onSubmit={this.submit}/>>
-						</div> ) } } />
+								<Login onSubmit={this.submit} />>
+							</div>
+						);
+					}}
+				/>
+
+				<Route
+					path={`${this.props.match.url}/login`}
+					render={() => {
+						return (
+							<div>
+								<Login onSubmit={this.submit} />>
+							</div>
+						);
+					}}
+				/>
+				<Route
+					path={`${this.props.match.url}/register`}
+					render={() => {
+						return (
+							<div>
+								<Register onSubmit={this.submit} />>
+							</div>
+						);
+					}}
+				/>
 			</div>
 		);
 	}
