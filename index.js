@@ -3,7 +3,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import reduxThunk from 'redux-thunk';
 
 import defaultReducer from './src/reducers/index';
 import { reducer as formReducer } from 'redux-form';
@@ -19,10 +20,12 @@ const rootReducer = combineReducers({
 	form: formReducer
 });
 
-const store = createStore(rootReducer);
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)
+
+//const store = createStore(rootReducer);
 
 ReactDOM.render(
-	<Provider store={store}>
+	<Provider  store={createStoreWithMiddleware(rootReducer)}>
 		<AppContainer />
 	</Provider>,
 	document.getElementById('root')

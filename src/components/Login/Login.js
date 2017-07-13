@@ -61,7 +61,6 @@ const renderField = ({
 
 let Login = props => {
 	const { handleSubmit, valid, pristine } = props;
-	console.error(props);
 
 	return (
 		<div className={styles['form__wrapper']}>

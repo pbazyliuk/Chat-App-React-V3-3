@@ -4,6 +4,8 @@
 import React, { Component } from 'react';
 import { Route, NavLink, Redirect } from 'react-router-dom';
 
+import * as actions from '../actions/index';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -15,15 +17,20 @@ import Register from '../components/Register/Register';
 class AuthContainer extends React.Component {
 	constructor(props) {
 		super(props);
+
+		this.submit = this.submit.bind(this);
 	}
 
 	submit(values) {
 		console.log(values);
+
+		this.props.registerUser(values);
+		
 	}
 
 	render() {
 		let { match } = this.props;
-
+		console.log('1111', this.props)
 		return (
 			<div>
 				<Route
@@ -64,7 +71,7 @@ class AuthContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	state: state
+	state
 });
 
-export default connect(mapStateToProps)(AuthContainer);
+export default connect(mapStateToProps, actions)(AuthContainer);

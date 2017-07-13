@@ -84,7 +84,7 @@ return <div>
 let Register = props =>  {
 
 		const { handleSubmit, valid, pristine } = props;
-
+		console.error(props)
 		return (
 			<div className={ styles['form__wrapper'] } >
 				<form action='' className={ styles['form-sign-up'] } onSubmit={ handleSubmit }>
