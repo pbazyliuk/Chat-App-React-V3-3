@@ -23,14 +23,12 @@ class AuthContainer extends React.Component {
 
 	submit(values) {
 		console.log(values);
-
 		this.props.registerUser(values);
-		
 	}
 
 	render() {
 		let { match } = this.props;
-		console.log('1111', this.props)
+		console.log('1111', this.props);
 		return (
 			<div>
 				<Route
@@ -74,4 +72,5 @@ const mapStateToProps = state => ({
 	state
 });
 
+console.log(actions);
 export default connect(mapStateToProps, actions)(AuthContainer);

@@ -2,8 +2,9 @@
 
 //@flow
 import React, { Component } from 'react';
+import { Router } from 'react-router';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
+import { history } from '../history/history';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -23,7 +24,7 @@ class AppContainer extends React.Component {
 		// const { dispatch, state } = this.props;
 		// const defaultAction = bindActionCreators(actionCreators.defaultAction, dispatch);
 		return (
-			<BrowserRouter>
+			<Router history={history}>
 				{/*<App data={state} func={defaultAction}/> */}
 				<div>
 					<Navbar />
@@ -36,7 +37,7 @@ class AppContainer extends React.Component {
 						<Route path="/:params" component={PageNotFound} />
 					</Switch>
 				</div>
-			</BrowserRouter>
+			</Router>
 		);
 	}
 }
