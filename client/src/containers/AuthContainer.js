@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // import * as actionCreators from '../actions/index';
-
+import Logout from '../components/Logout/Logout';
 import Login from '../components/Login/Login';
 import Register from '../components/Register/Register';
 
@@ -18,17 +18,23 @@ class AuthContainer extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.submit = this.submit.bind(this);
+		this.submitLogin = this.submitLogin.bind(this);
+		this.submitRegister = this.submitRegister.bind(this);
 	}
 
-	submit(values) {
+	submitLogin(values) {
+		console.log(values);
+		this.props.loginUser(values);
+	}
+
+	submitRegister(values) {
 		console.log(values);
 		this.props.registerUser(values);
 	}
 
 	render() {
 		let { match } = this.props;
-		console.log('1111', this.props);
+
 		return (
 			<div>
 				<Route
@@ -37,7 +43,7 @@ class AuthContainer extends React.Component {
 					render={() => {
 						return (
 							<div>
-								<Login onSubmit={this.submit} />>
+								<Login onSubmit={this.submitLogin} />>
 							</div>
 						);
 					}}
@@ -48,7 +54,7 @@ class AuthContainer extends React.Component {
 					render={() => {
 						return (
 							<div>
-								<Login onSubmit={this.submit} />>
+								<Login onSubmit={this.submitLogin} />>
 							</div>
 						);
 					}}
@@ -58,7 +64,19 @@ class AuthContainer extends React.Component {
 					render={() => {
 						return (
 							<div>
-								<Register onSubmit={this.submit} />>
+								<Register onSubmit={this.submitRegister} />>
+							</div>
+						);
+					}}
+				/>
+
+				<Route
+					path={`${this.props.match.url}/logout`}
+					render={() => {
+						
+						return (
+							<div>
+								<Logout />
 							</div>
 						);
 					}}
@@ -72,5 +90,4 @@ const mapStateToProps = state => ({
 	state
 });
 
-console.log(actions);
 export default connect(mapStateToProps, actions)(AuthContainer);

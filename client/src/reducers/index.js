@@ -18,6 +18,12 @@ export default function(state = INITIAL_APPLICATION_STATE, action) {
 
 			return clonedState;
 
+		case UNAUTH_USER:
+			return { ...state, authenticated: false };
+
+		case AUTH_ERROR:
+			return { ...state, error: action.payload };
+
 		default:
 			return state;
 	}

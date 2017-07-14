@@ -12,7 +12,6 @@ class ChatsNavbar extends React.Component {
   }
 
   handleSizeChange () {
-
     this.props.onSizeChange()
   }
 

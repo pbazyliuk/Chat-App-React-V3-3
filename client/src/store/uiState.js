@@ -15,7 +15,7 @@
 
 const INITIAL_UI_STATE = {
 	user: {},
-
+	error: '',
 	authenticated: undefined,
 	currentChat: undefined
 };

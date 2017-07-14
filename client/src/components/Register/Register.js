@@ -197,4 +197,6 @@ Register = reduxForm({
 	validate
 })(Register)
 
+
+
 export default Register;

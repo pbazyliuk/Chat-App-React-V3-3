@@ -1,6 +1,7 @@
 // Libs
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
 import styles from './Login.scss';
@@ -60,8 +61,11 @@ const renderField = ({
 };
 
 let Login = props => {
-	const { handleSubmit, valid, pristine } = props;
-
+	const { handleSubmit, valid, pristine, value } = props;
+	console.log('Login', value);
+	// const hasError = props.state.applicationState.error;
+	// console.log(typeof hasError);
+	// console.log(typeof hasError);
 	return (
 		<div className={styles['form__wrapper']}>
 			<form className={styles['form-sign-in']} onSubmit={handleSubmit}>
@@ -99,9 +103,19 @@ let Login = props => {
 						required
 						pattern=".{6,}"
 					/>
-					{/*<div className={ styles['text-has-error'] }>
+					{/* <div className={ styles['text-has-error'] }>
 						Password is required (min 6 characters)
-					</div> */}
+					</div>  */}
+				</div>
+
+				<div
+					className={
+						!value
+							? `${styles['hidden']}`
+							: `${styles['isShown']} ${styles['error']}`
+					}
+				>
+					{value}
 				</div>
 
 				<button
@@ -116,9 +130,17 @@ let Login = props => {
 	);
 };
 
+// const mapStateToProps = state => ({
+// 	state
+// });
+
 Login = reduxForm({
 	form: 'login',
 	validate
 })(Login);
+
+Login = connect(state => ({
+	value: state.applicationState.error // pull initial values from account reducer
+}))(Login);
 
 export default Login;

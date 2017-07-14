@@ -24,7 +24,7 @@
 .navbar__menu-link {
     text-decoration: none;
     font-size: 21px;
-    color: #989AD7;
+    color: #989ad7;
     font-weight: 400;
     margin-left: 75px;
 }
@@ -33,7 +33,7 @@
     text-decoration: none;
     font-size: 21px;
     color: #3b3e99;
-    font-weight: 400;    
+    font-weight: 400;
 }
 
 .navbar__menu-item:last-child .navbar__menu-link {
@@ -54,4 +54,12 @@
 
 .active-color {
     background-color: #3b3e99 !important;
+}
+
+.hidden {
+    display: none;
+}
+
+.isShown {
+    display: inline-block;
 }
