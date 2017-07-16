@@ -16,8 +16,8 @@
 const INITIAL_UI_STATE = {
 	user: {},
 	error: '',
-	authenticated: undefined,
-	currentChat: undefined
+	authenticated: false,
+	currentChat: null
 };
 
 export default INITIAL_UI_STATE;

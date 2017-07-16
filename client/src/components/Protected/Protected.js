@@ -9,16 +9,19 @@ import {
 } from 'react-router-dom';
 import Chats from '../Chats/Chats';
 
-const Protected = (props, Component, url, isAuthenticated) => {
+const Protected = (props, Component, url, boolVal) => {
 	// console.log(props)
-	let isProtected = isAuthenticated === true ? 
-		props.state.applicationState.uiState.authenticated 
-		:
-		!props.state.applicationState.uiState.authenticated;
+	let isProtected = props.state.applicationState.uiState.authenticated;
+		// debugger
+		if(boolVal) {
+			return isProtected === true ? Component : <Redirect to={`${url}`} push />;
+		}
+		else {
+			return isProtected === true ? <Redirect to={`${url}`} push /> : Component;
+		}	
 
-		console.log(Component)
-		
-	return isProtected === true ? <Component {...props} /> : <Redirect to={`${url}`} push />;
+	
+	
 };
 
 export default Protected;

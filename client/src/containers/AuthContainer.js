@@ -22,7 +22,7 @@ class AuthContainer extends React.Component {
 
 		this.submitLogin = this.submitLogin.bind(this);
 		this.submitRegister = this.submitRegister.bind(this);
-		// this.submitLogout = this.submitLogout.bind(this);
+		this.submitLogout = this.submitLogout.bind(this);
 	}
 
 	submitLogin(values) {
@@ -35,9 +35,9 @@ class AuthContainer extends React.Component {
 		this.props.registerUser(values);
 	}
 
-	// submitLogout() {
-	// 	this.props.logoutUser();
-	// }
+	submitLogout() {
+		this.props.logoutUser();
+	}
 
 	render() {
 		let { match } = this.props;
@@ -50,7 +50,7 @@ class AuthContainer extends React.Component {
 					render={() => {
 						return (
 							<div>
-								<Login onSubmit={this.submitLogin} />>
+								<Redirect from="{match.path}" to="auth/login" />
 							</div>
 						);
 					}}
@@ -60,9 +60,12 @@ class AuthContainer extends React.Component {
 					path={`${this.props.match.url}/login`}
 					render={() => {
 						return (
-							<div>
-								<Login onSubmit={this.submitLogin} />
-							</div>
+							Protected(
+								this.props,
+								<Login {...this.props} onSubmit={this.submitLogin} />,
+								'/chat',
+								false
+							)
 						);
 					}}
 				/>
@@ -70,9 +73,13 @@ class AuthContainer extends React.Component {
 					path={`${this.props.match.url}/register`}
 					render={() => {
 						return (
-							<div>
-								<Register onSubmit={this.submitRegister} />
-							</div>
+								Protected(
+								this.props,
+								<Register {...this.props} onSubmit={this.submitRegister} />,
+								'/chat',
+								false
+							)
+								
 						);
 					}}
 				/>
@@ -85,7 +92,7 @@ class AuthContainer extends React.Component {
 						//this.submitLogout();
 						return (
 							
-								Protected(this.props, Logout, `/`, true)
+								<Logout logout={this.submitLogout}/>
 						);
 					}}
 				/>

@@ -72,10 +72,17 @@ exports.register = function(req, res, next) {
             });
         });
     })
-
-    
-
-    
-
-
 }
+
+exports.getAllUsers = function(req, res, next) {
+
+    User.find({}, {_id: 1, firstname: 1, lastname: 1, email: 1}, function(err, users) {
+        if (err) { return next(err); }
+
+        if(users) {
+            console.log(users);
+            res.send(users);
+        }
+
+      });
+  }

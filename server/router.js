@@ -10,6 +10,9 @@ module.exports = function(app) {
     app.get('/', requireAuth, function(req, res) {
         res.send({ message: 'Super secret code ABC123'})
     });
-   app.post('/login', requireLogin, Authentication.login)
-   app.post('/register', Authentication.register);
+    app.post('/login', requireLogin, Authentication.login);
+    app.post('/register', Authentication.register);
+
+    //Get all registered users route
+    app.get('/api/users', Authentication.getAllUsers);
 }

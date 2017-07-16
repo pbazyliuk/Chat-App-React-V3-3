@@ -62,7 +62,6 @@ const renderField = ({
 
 let Login = props => {
 	const { handleSubmit, valid, pristine, value } = props;
-	console.log('Login', value);
 	// const hasError = props.state.applicationState.error;
 	// console.log(typeof hasError);
 	// console.log(typeof hasError);
