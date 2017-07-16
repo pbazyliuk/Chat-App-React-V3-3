@@ -39,7 +39,7 @@ class AppContainer extends React.Component {
 						<Route exact path="/" component={Home} />
 						<Route
 							path="/chat"
-							render={() => <Protected data={this.props} />}
+							render={() => Protected(this.props, Chats, '/auth/login', true, null, null)} />}
 						/>
 
 						<Route path="/auth" component={AuthContainer} />

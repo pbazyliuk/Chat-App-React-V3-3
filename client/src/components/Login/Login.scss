@@ -196,6 +196,11 @@ button:focus {
 	display: block;
 }
 
-.error {
-	color: red;
+.login-error {
+	position: relative;
+	top: 30px;
+	background-color: lightcoral;
+	text-align: center;
+	padding: 7px 0;
+	color: #fff;
 }

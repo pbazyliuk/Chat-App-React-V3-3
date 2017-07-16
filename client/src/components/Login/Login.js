@@ -112,7 +112,7 @@ let Login = props => {
 					className={
 						!value
 							? `${styles['hidden']}`
-							: `${styles['isShown']} ${styles['error']}`
+							: `${styles['isShown']} ${styles['login-error']}`
 					}
 				>
 					{value}

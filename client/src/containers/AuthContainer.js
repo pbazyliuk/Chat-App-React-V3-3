@@ -14,12 +14,15 @@ import Logout from '../components/Logout/Logout';
 import Login from '../components/Login/Login';
 import Register from '../components/Register/Register';
 
+import Protected from '../components/Protected/Protected';
+
 class AuthContainer extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.submitLogin = this.submitLogin.bind(this);
 		this.submitRegister = this.submitRegister.bind(this);
+		// this.submitLogout = this.submitLogout.bind(this);
 	}
 
 	submitLogin(values) {
@@ -31,6 +34,10 @@ class AuthContainer extends React.Component {
 		console.log(values);
 		this.props.registerUser(values);
 	}
+
+	// submitLogout() {
+	// 	this.props.logoutUser();
+	// }
 
 	render() {
 		let { match } = this.props;
@@ -54,7 +61,7 @@ class AuthContainer extends React.Component {
 					render={() => {
 						return (
 							<div>
-								<Login onSubmit={this.submitLogin} />>
+								<Login onSubmit={this.submitLogin} />
 							</div>
 						);
 					}}
@@ -64,7 +71,7 @@ class AuthContainer extends React.Component {
 					render={() => {
 						return (
 							<div>
-								<Register onSubmit={this.submitRegister} />>
+								<Register onSubmit={this.submitRegister} />
 							</div>
 						);
 					}}
@@ -73,11 +80,12 @@ class AuthContainer extends React.Component {
 				<Route
 					path={`${this.props.match.url}/logout`}
 					render={() => {
+						console.log(this.props);
 						
+						//this.submitLogout();
 						return (
-							<div>
-								<Logout />
-							</div>
+							
+								Protected(this.props, Logout, `/`, true)
 						);
 					}}
 				/>
@@ -85,7 +93,7 @@ class AuthContainer extends React.Component {
 		);
 	}
 }
-
+{/*<Logout logout={this.submitLogout}/>*/}
 const mapStateToProps = state => ({
 	state
 });

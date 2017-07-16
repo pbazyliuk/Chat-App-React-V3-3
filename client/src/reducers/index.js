@@ -9,17 +9,25 @@ console.error(INITIAL_APPLICATION_STATE);
 export default function(state = INITIAL_APPLICATION_STATE, action) {
 	switch (action.type) {
 		case AUTH_USER:
-			console.log(action.payload);
+			{console.log(action.payload);
+			
 			let clonedState = { ...state };
+			
 			console.error(clonedState);
 
 			clonedState.uiState.user = action.payload;
 			clonedState.uiState.authenticated = true;
 
-			return clonedState;
+			return clonedState;}
 
 		case UNAUTH_USER:
-			return { ...state, authenticated: false };
+			{console.log('unauth');
+			
+			let clonedState = { ...state };
+			
+			clonedState.uiState.authenticated = false;
+			clonedState.uiState.user = {};
+			return clonedState;}
 
 		case AUTH_ERROR:
 			return { ...state, error: action.payload };

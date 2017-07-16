@@ -11,7 +11,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 
 //DB Setup
-mongoose.connect('mongodb://localhost:auth/auth');
+mongoose.connect('mongodb://localhost:chat-app/chat-app');
 
 //App Setup
 app.use(morgan('combined'));

@@ -12,7 +12,15 @@ function tokenForUser(user) {
 exports.login = function(req, res, next) {
     //User has already had thero email and password auth'd
     //We just need to give them a token
-    res.send({ token: tokenForUser(req.user)})
+    // res.send({ token: tokenForUser(req.user)})
+   
+    User.findOne({'email': req.user.email}, {_id: 1, firstname: 1, lastname: 1, email: 1}, function(err, curUser) {
+    if (err) { return next(err); }
+
+    if (curUser) {
+        res.send({ token: tokenForUser(req.user), user: curUser });
+    }
+   });
 }
 
 
@@ -20,12 +28,15 @@ exports.register = function(req, res, next) {
     console.log(req.body)
     const email = req.body.email;
     const password = req.body.password;
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
+  
     // res.send({ success: 'true'});
 
     //write validation for email and password
 
     if(!email || !password) {
-        return res.status(422).send({ error: 'You must provide email and password'})
+        return res.status(422).send({ error: 'You must provide valid email and password'})
     }
 
     //See if user with the given email exist
@@ -39,16 +50,27 @@ exports.register = function(req, res, next) {
 
         //if a user with email does not exist, create and save user record
         const user = new User({ 
+            firstname: firstname,
+            lastname: lastname,
             email: email,
             password: password
         })
 
         user.save(function(err) {
-            if(err) { return next(err); }
-        
-        //Respond to request indication the user was created
-        res.json({ token: tokenForUser(user) });
-        })
+            if (err) { return next(err); }
+      
+            console.log(user)
+
+            User.findOne({ email: email}, {_id: 1, firstname: 1, lastname: 1, email: 1},
+            function(err, curUser) {
+                if (err) { return next(err); }
+
+                if(curUser) {
+                     // Respond to request indicating the user was created
+                    res.json({ token: tokenForUser(user), user: curUser});
+                }
+            });
+        });
     })
 
     
