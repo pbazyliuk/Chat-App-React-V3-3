@@ -58,7 +58,6 @@ const renderFieldSelect = ({
   className,
   name
 }) => {
-  console.error(name);
   let users = ['Tom', 'Sam', 'Donald', 'Ola', 'Mike'];
   let usersHtml = users.map((user) => {
     return <option key={user} >

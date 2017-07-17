@@ -1,7 +1,16 @@
 import axios from 'axios';
 import { history } from '../history/history';
+import * as ws from '../utils/utils';
 
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, GET_ALL_USERS } from '../actionsTypes/index.js';
+import {
+	AUTH_USER,
+	UNAUTH_USER,
+	AUTH_ERROR,
+	GET_ALL_USERS,
+	JOIN_CHAT,
+	SEND_MESSAGE,
+	LEAVE_CHAT
+} from '../actionsTypes/index.js';
 
 const ROOT_URL = 'http://localhost:8090';
 
@@ -11,8 +20,8 @@ export function registerUser({ firstname, lastname, email, password }) {
 		axios
 			.post(`${ROOT_URL}/register`, { firstname, lastname, email, password })
 			.then(response => {
-				dispatch({ type: AUTH_USER, payload: response.data.user });
 				localStorage.setItem('token', response.data.token);
+				dispatch({ type: AUTH_USER, payload: response.data.user });
 
 				history.push('/chat');
 			})
@@ -32,13 +41,11 @@ export function loginUser({ email, password }) {
 			.then(response => {
 				// If request is good...
 				// - Update state to indicate user is authenticated
-
-				dispatch({ type: AUTH_USER, payload: response.data.user });
-
 				// - Save the JWT token
 				localStorage.setItem('token', response.data.token);
 
-				
+				dispatch({ type: AUTH_USER, payload: response.data.user });
+
 				// - redirect to the route '/chats'
 				history.push('/chat');
 			})
@@ -60,25 +67,30 @@ export function authError(error) {
 export function logoutUser() {
 	localStorage.removeItem('token');
 	localStorage.removeItem('user');
-
+	// console.log(ws.socket.connected);
+	// if(ws.socket) {
+	// 	ws.disconnect();
+	// }
+	// console.log(ws.socket.connected);
 	return { type: UNAUTH_USER };
 }
-
 
 export function getAllUsers() {
 	return function(dispatch) {
 		// Submit email/password to the server
 		console.error('get all user action', localStorage.getItem('token'));
-		axios.get(`${ROOT_URL}/api/users`, 
-				{ headers: { 
+		axios
+			.get(`${ROOT_URL}/api/users`, {
+				headers: {
 					'Content-Type': 'application/json',
-					// 'authorization': localStorage.getItem('token')
-				} })
+					authorization: localStorage.getItem('token')
+				}
+			})
 			.then(response => {
 				// If request is good...
 				// - Update state to indicate user is authenticated
 				console.error('Get All Users Action', response.data);
-				dispatch({ type: GET_ALL_USERS, payload: response.data});
+				dispatch({ type: GET_ALL_USERS, payload: response.data });
 			})
 			.catch(() => {
 				// If request is bad...

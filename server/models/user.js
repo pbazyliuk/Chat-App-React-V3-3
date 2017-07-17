@@ -9,7 +9,7 @@ const userSchema = new Schema({
     lastname: String,
     isLogged: Boolean,
     email: { type: String, unique: true, lowercase: true },
-    password: String
+    password: String,
 });
 
 //On Save Hook, encrypt password

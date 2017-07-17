@@ -4,6 +4,8 @@ import ChatsList from '../ChatsList/ChatsList';
 import ChatsDetails from '../ChatsDetails/ChatsDetails';
 import ChatsMenu from '../ChatsMenu/ChatsMenu';
 
+import WebSockets from '../../containers/WebSockets';
+
 import styles from './Chats.scss';
 
 class Chats extends React.Component {
@@ -43,6 +45,7 @@ class Chats extends React.Component {
 
 		return (
 			<div className={styles['wrapper']}>
+				<WebSockets/>
 				<aside
 					className={styles['aside-part']}
 					style={this.state.isToggleOn ? collapseWidth : {}}

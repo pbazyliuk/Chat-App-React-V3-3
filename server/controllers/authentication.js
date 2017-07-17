@@ -25,7 +25,7 @@ exports.login = function(req, res, next) {
 
 
 exports.register = function(req, res, next) {
-    console.log(req.body)
+    // console.log(req.body)
     const email = req.body.email;
     const password = req.body.password;
     const firstname = req.body.firstname;
@@ -53,13 +53,14 @@ exports.register = function(req, res, next) {
             firstname: firstname,
             lastname: lastname,
             email: email,
-            password: password
+            password: password,
+            isLogged: false
         })
 
         user.save(function(err) {
             if (err) { return next(err); }
       
-            console.log(user)
+            //console.log(user)
 
             User.findOne({ email: email}, {_id: 1, firstname: 1, lastname: 1, email: 1},
             function(err, curUser) {
@@ -76,11 +77,11 @@ exports.register = function(req, res, next) {
 
 exports.getAllUsers = function(req, res, next) {
 
-    User.find({}, {_id: 1, firstname: 1, lastname: 1, email: 1}, function(err, users) {
+    User.find({}, {_id: 1, firstname: 1, lastname: 1, email: 1, isLogged: 1}, function(err, users) {
         if (err) { return next(err); }
 
         if(users) {
-            console.log(users);
+            //console.log(users);
             res.send(users);
         }
 
