@@ -1,15 +1,14 @@
 import io from 'socket.io-client';
-export { sendMessage, initConnection, addListener, socket, disconnect };
+export { sendMessageWS, initConnection, addListener, socket, disconnect };
 
 let socket;
-const listeners = {};
+let listeners = {};
 
 function initConnection(message) {
-
-	console.error('SOCKET', socket)
+	// console.error('SOCKET', socket);
 
 	if (!socket) {
-		console.error('New Socket');
+		// console.error('New Socket');
 		connect();
 	}
 
@@ -19,8 +18,7 @@ function initConnection(message) {
 }
 
 function connect() {
-    
-	console.log('ws connect');
+	// console.log('ws connect');
 	socket = io('http://localhost:8090');
 
 	socket.on('connect', function() {
@@ -34,20 +32,25 @@ function connect() {
 				console.log(socket);
 				onJoin(val.user);
 			})
-
 			.on('leave', function(val) {
 				console.log('leave', val.user);
 				console.log(socket);
 				onLeave(val.user);
+			})
+			.on('message', function(message) {
+				console.log('message', message);
+				console.log(socket);
+				onMessage(message);
 			});
 
-		socket.on('message', onMessage);
+		// socket.on('message', onMessage);
 		// socket.on('join', onJoin);
 		// socket.on('leave', onLeave);
 	});
 }
 
 function onMessage(msg) {
+	console.log('onMessage', msg);
 	fireListeners('message', msg);
 }
 
@@ -62,25 +65,31 @@ function onLeave(username) {
 }
 
 function disconnect() {
-	// socket.close();
-	socket.disconnect();
+	socket.close();
+	// socket.disconnect();
 	socket = null;
-
+	listeners = {};
 }
 
 function send(message) {
+	console.log('send to server', message);
 	socket.emit('message', message);
 }
 
-function sendMessage(message) {
+function sendMessageWS(message) {
 	console.log('send message', message);
 	initConnection(message);
 }
 
 function fireListeners(event, payload) {
-	console.log('event, payload', event, payload);
+	console.log('event', event);
+	console.log('payload', payload);
+	console.log('listeners', listeners);
 	if (listeners[event]) {
-		[...listeners[event]].forEach(listener => listener(payload));
+		console.log([...listeners[event]]);
+		[...listeners[event]].forEach(listener => {
+			listener(payload);
+		});
 	}
 }
 

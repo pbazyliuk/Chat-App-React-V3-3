@@ -26,12 +26,12 @@ class AuthContainer extends React.Component {
 	}
 
 	submitLogin(values) {
-		console.log(values);
+		// console.log(values);
 		this.props.loginUser(values);
 	}
 
 	submitRegister(values) {
-		console.log(values);
+		// console.log(values);
 		this.props.registerUser(values);
 	}
 
@@ -59,27 +59,22 @@ class AuthContainer extends React.Component {
 				<Route
 					path={`${this.props.match.url}/login`}
 					render={() => {
-						return (
-							Protected(
-								this.props,
-								<Login {...this.props} onSubmit={this.submitLogin} />,
-								'/chat',
-								false
-							)
+						return Protected(
+							this.props,
+							<Login {...this.props} onSubmit={this.submitLogin} />,
+							'/chat',
+							false
 						);
 					}}
 				/>
 				<Route
 					path={`${this.props.match.url}/register`}
 					render={() => {
-						return (
-								Protected(
-								this.props,
-								<Register {...this.props} onSubmit={this.submitRegister} />,
-								'/chat',
-								false
-							)
-								
+						return Protected(
+							this.props,
+							<Register {...this.props} onSubmit={this.submitRegister} />,
+							'/chat',
+							false
 						);
 					}}
 				/>
@@ -87,20 +82,19 @@ class AuthContainer extends React.Component {
 				<Route
 					path={`${this.props.match.url}/logout`}
 					render={() => {
-						console.log(this.props);
-						
+						// console.log(this.props);
+
 						//this.submitLogout();
-						return (
-							
-								<Logout logout={this.submitLogout}/>
-						);
+						return <Logout logout={this.submitLogout} />;
 					}}
 				/>
 			</div>
 		);
 	}
 }
-{/*<Logout logout={this.submitLogout}/>*/}
+{
+	/*<Logout logout={this.submitLogout}/>*/
+}
 const mapStateToProps = state => ({
 	state
 });

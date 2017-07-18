@@ -1,7 +1,7 @@
 import React from 'react';
 import ChatsNavbar from '../ChatsNavbar/ChatsNavbar';
 import UsersList from '../UsersList/UsersList';
-// import ChatsDetails from '../ChatsDetails/ChatsDetails';
+import ChatsDetails from '../ChatsDetails/ChatsDetails';
 import ChatsMenu from '../ChatsMenu/ChatsMenu';
 
 import WebSockets from '../../containers/WebSockets';
@@ -9,6 +9,10 @@ import WebSockets from '../../containers/WebSockets';
 import MessagesNavbar from '../MessagesNavbar/MessagesNavbar';
 import MessagesList from '../MessagesList/MessagesList';
 import MessagesInput from '../MessagesInput/MessagesInput';
+
+import * as actions from '../../actions/index';
+
+import { connect } from 'react-redux';
 
 import styles from './Chats.scss';
 
@@ -24,6 +28,10 @@ class Chats extends React.Component {
 		this.handleSizeChange = this.handleSizeChange.bind(this);
 		this.handleMenuShow = this.handleMenuShow.bind(this);
 	}
+
+	// componentWillMount() {
+	// 	this.props.getMessages();
+	// }
 
 	handleSizeChange() {
 		this.setState(prevState => ({
@@ -49,7 +57,7 @@ class Chats extends React.Component {
 
 		return (
 			<div className={styles['wrapper']}>
-				<WebSockets/>
+				<WebSockets />
 				<aside
 					className={styles['aside-part']}
 					style={this.state.isToggleOn ? collapseWidth : {}}
@@ -65,8 +73,8 @@ class Chats extends React.Component {
 				<div
 					className={styles['main-part']}
 					style={this.state.isToggleOn ? expandWidth : {}}
-				>	
-					{/*<ChatsDetails />*/}
+				>
+					{/* <ChatsDetails /> */}
 
 					<MessagesNavbar />
 					<MessagesList />
@@ -77,4 +85,8 @@ class Chats extends React.Component {
 	}
 }
 
-export default Chats;
+const mapStateToProps = state => {
+	return { messages: state.applicationState.storeData.messages };
+};
+
+export default connect(mapStateToProps, actions)(Chats);

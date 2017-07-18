@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
+
 import MessagesNavbar from '../MessagesNavbar/MessagesNavbar';
 import MessagesList from '../MessagesList/MessagesList';
 import MessagesInput from '../MessagesInput/MessagesInput';
@@ -11,22 +13,22 @@ class ChatsDetails extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+
+	
+
 	render() {
 		return (
 			<div>
-				<Route exact path="/chat" component={ChatsHolder} />
-				<Route
-					path="/chat/:id"
-					render={({ match }) =>
-						<div>
-							<MessagesNavbar />
-							<MessagesList id={match.params.id} />
-							<MessagesInput />
-						</div>}
-				/>
+				<MessagesNavbar />
+				<MessagesList data={this.props.messages} />
+				<MessagesInput />
 			</div>
 		);
 	}
 }
 
-export default ChatsDetails;
+const mapStateToProps = state => {
+	return { messages: state.applicationState.uiState.messages };
+};
+
+export default connect(mapStateToProps)(ChatsDetails);

@@ -1,42 +1,54 @@
-import React from 'react'
-import User from '../User/User'
-import preload from '../../data/chats.json'
-import PropTypes from 'prop-types'
+import React from 'react';
+import User from '../User/User';
+import preload from '../../data/chats.json';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 
-import styles from './UsersList.scss'
+import styles from './UsersList.scss';
 
 class UsersList extends React.Component {
-  constructor(props) {
-    super(props);
-    
-  }
+	constructor(props) {
+		super(props);
+	}
 
-  componentDidMount() {
-    this.props.getAllUsers();
-  }
+	componentDidMount() {
+		this.props.getAllUsers();
+	}
 
-  render () {
-    //
-    const isVisible = {
-      display: 'none'
-    }
+	render() {
+		//
+		const isVisible = {
+			display: 'none'
+		};
 
-    const { users } = this.props;
-
-    return (
-      <ul className={styles ['chat-list']} style={this.props.data.isMenuShown ? isVisible : {}}>
-        {users.map(function (user) {
-          return (
-            <User {...user} key={user._id} />
-            
-          )
-        })}
-      </ul>
-    )
-  }
+		const { users, filterVal } = this.props;
+		// console.log(filterVal);
+		return (
+			<ul
+				className={styles['chat-list']}
+				style={this.props.data.isMenuShown ? isVisible : {}}
+			>
+				{users
+					.filter(user => {
+						// console.log(filterVal);
+						if (filterVal !== '') {
+							const regex = new RegExp(filterVal, 'i');
+							if (regex.test(user.firstname)) {
+								return true;
+							}
+							return false;
+						}
+						return true;
+					})
+					.map(function(user) {
+						console.log(user);
+						return <User {...user} key={user._id} />;
+					})}
+			</ul>
+		);
+	}
 }
 
 // ChatsList.propTypes = {
@@ -45,7 +57,11 @@ class UsersList extends React.Component {
 // }
 
 function mapStateToprops(state) {
-  return {users: state.applicationState.storeData.users, authenticated: state.applicationState.uiState.authenticated }
+	return {
+		users: state.applicationState.storeData.users,
+		authenticated: state.applicationState.uiState.authenticated,
+		filterVal: state.applicationState.uiState.searchUserValue
+	};
 }
 
 export default connect(mapStateToprops, actions)(UsersList);

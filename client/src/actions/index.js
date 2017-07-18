@@ -10,7 +10,9 @@ import {
 	JOIN_CHAT,
 	SEND_MESSAGE,
 	LEAVE_CHAT,
-	GET_MESSAGES
+	GET_MESSAGES,
+	SEARCH_MESSAGE_VAL,
+	SEARCH_USER_VAL
 } from '../actionsTypes/index.js';
 
 const ROOT_URL = 'http://localhost:8090';
@@ -68,11 +70,9 @@ export function authError(error) {
 export function logoutUser() {
 	localStorage.removeItem('token');
 	localStorage.removeItem('user');
-	// console.log(ws.socket.connected);
-	// if(ws.socket) {
-	// 	ws.disconnect();
-	// }
-	// console.log(ws.socket.connected);
+
+	console.log(ws.socket);
+
 	return { type: UNAUTH_USER };
 }
 
@@ -101,32 +101,30 @@ export function getAllUsers() {
 	};
 }
 
-
-
 export function sendMessage(data) {
+	saveMessageToBase(data);
 	return function(dispatch) {
-		
-		axios
-			.post(`${ROOT_URL}/api/messages`, data
-			)
-			.then(response => {
-				// If request is good...
-				// - Update state to indicate user is authenticated
-				console.error('Message', response.data);
-				dispatch({ type: SEND_MESSAGE, payload: response.data });
-			})
-			.catch(() => {
-				// If request is bad...
-				// - Show an error to the user
-				dispatch(authError('Some problems occurs with users send message!'));
-			});
+		console.log('send message', data);
+		dispatch({ type: SEND_MESSAGE, payload: data });
 	};
 }
 
+function saveMessageToBase(data) {
+	return axios
+		.post(`${ROOT_URL}/api/messages`, data)
+		.then(response => {
+			// If request is good...
+			// - Update state to indicate user is authenticated
+		})
+		.catch(() => {
+			// If request is bad...
+			// - Show an error to the user
+			dispatch(authError('Some problems occurs with users send message!'));
+		});
+}
 
 export function getMessages() {
 	return function(dispatch) {
-		
 		axios
 			.get(`${ROOT_URL}/api/messages`)
 			.then(response => {
@@ -140,5 +138,17 @@ export function getMessages() {
 				// - Show an error to the user
 				dispatch(authError('Some problems occurs with users send message!'));
 			});
+	};
+}
+
+export function searchUserVal(value) {
+	return function(dispatch) {
+		dispatch({ type: SEARCH_USER_VAL, payload: value });
+	};
+}
+
+export function searchMessageVal(value) {
+	return function(dispatch) {
+		dispatch({ type: SEARCH_MESSAGE_VAL, payload: value });
 	};
 }

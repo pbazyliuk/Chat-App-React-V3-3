@@ -17,7 +17,9 @@ const INITIAL_UI_STATE = {
 	user: {},
 	error: '',
 	authenticated: false,
-	currentChat: null
+	currentChat: null,
+	searchUserValue: '',
+	searchMessageValue: ''
 };
 
 export default INITIAL_UI_STATE;
