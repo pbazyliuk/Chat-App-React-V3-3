@@ -6,7 +6,7 @@ import styles from './Message.scss';
 
 class Message extends React.Component {
 	render() {
-		const { text, sentAt } = this.props.message;
+		const { text, sentAt, userName } = this.props.message;
 		return (
 			<li className={styles['user-message-author']}>
 				<div className={styles['user-message-wrapper']}>
@@ -19,7 +19,7 @@ class Message extends React.Component {
 						/>
 					</div>
 					<div className={styles['user-message__text-cotainer']}>
-						<span className={styles['user-message__text-author']}>Author</span>
+						<span className={styles['user-message__text-author']}>{userName}</span>
 						<div className={styles['user-message__text-message']}>
 							{text}
 						</div>

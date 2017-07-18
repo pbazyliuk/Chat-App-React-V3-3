@@ -2,7 +2,7 @@
 
 import INITIAL_APPLICATION_STATE from '../store/initialState.js';
 
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, GET_ALL_USERS} from '../actionsTypes/index.js';
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, GET_ALL_USERS, SEND_MESSAGE, GET_MESSAGES} from '../actionsTypes/index.js';
 
 console.error(INITIAL_APPLICATION_STATE);
 
@@ -47,6 +47,23 @@ export default function(state = INITIAL_APPLICATION_STATE, action) {
 			
 			clonedState.storeData.users = action.payload;
 			
+			return clonedState;}
+
+		case SEND_MESSAGE:
+			console.log('SEND MESSAGE', action.payload)
+			{let clonedState = { ...state };
+			
+			clonedState.storeData.messages.push(action.payload);
+
+			return clonedState;}
+
+		
+		case GET_MESSAGES:
+			console.log('GET_MESSAGES', action.payload)
+			{let clonedState = { ...state };
+			
+			clonedState.storeData.messages = action.payload;
+
 			return clonedState;}
 
 		default:

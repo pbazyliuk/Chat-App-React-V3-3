@@ -2,9 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import styles from './ChatsItem.scss'
+import styles from './User.scss'
 
-class ChatsItem extends React.Component {
+class User extends React.Component {
   render () {
     const { id, firstname, createdAt } = this.props;
 
@@ -30,4 +30,4 @@ class ChatsItem extends React.Component {
 //   chat: PropTypes.object.isRequired
 // }
 
-export default ChatsItem
+export default User;

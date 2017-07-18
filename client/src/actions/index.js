@@ -9,7 +9,8 @@ import {
 	GET_ALL_USERS,
 	JOIN_CHAT,
 	SEND_MESSAGE,
-	LEAVE_CHAT
+	LEAVE_CHAT,
+	GET_MESSAGES
 } from '../actionsTypes/index.js';
 
 const ROOT_URL = 'http://localhost:8090';
@@ -96,6 +97,48 @@ export function getAllUsers() {
 				// If request is bad...
 				// - Show an error to the user
 				dispatch(authError('Some problems occurs with users fetch action'));
+			});
+	};
+}
+
+
+
+export function sendMessage(data) {
+	return function(dispatch) {
+		
+		axios
+			.post(`${ROOT_URL}/api/messages`, data
+			)
+			.then(response => {
+				// If request is good...
+				// - Update state to indicate user is authenticated
+				console.error('Message', response.data);
+				dispatch({ type: SEND_MESSAGE, payload: response.data });
+			})
+			.catch(() => {
+				// If request is bad...
+				// - Show an error to the user
+				dispatch(authError('Some problems occurs with users send message!'));
+			});
+	};
+}
+
+
+export function getMessages() {
+	return function(dispatch) {
+		
+		axios
+			.get(`${ROOT_URL}/api/messages`)
+			.then(response => {
+				// If request is good...
+				// - Update state to indicate user is authenticated
+				console.error('Get Messages', response.data);
+				dispatch({ type: GET_MESSAGES, payload: response.data });
+			})
+			.catch(() => {
+				// If request is bad...
+				// - Show an error to the user
+				dispatch(authError('Some problems occurs with users send message!'));
 			});
 	};
 }

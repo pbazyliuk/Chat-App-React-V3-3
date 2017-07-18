@@ -1,10 +1,14 @@
 import React from 'react';
 import ChatsNavbar from '../ChatsNavbar/ChatsNavbar';
-import ChatsList from '../ChatsList/ChatsList';
-import ChatsDetails from '../ChatsDetails/ChatsDetails';
+import UsersList from '../UsersList/UsersList';
+// import ChatsDetails from '../ChatsDetails/ChatsDetails';
 import ChatsMenu from '../ChatsMenu/ChatsMenu';
 
 import WebSockets from '../../containers/WebSockets';
+
+import MessagesNavbar from '../MessagesNavbar/MessagesNavbar';
+import MessagesList from '../MessagesList/MessagesList';
+import MessagesInput from '../MessagesInput/MessagesInput';
 
 import styles from './Chats.scss';
 
@@ -56,13 +60,17 @@ class Chats extends React.Component {
 						data={this.state}
 					/>
 					<ChatsMenu data={this.state} />
-					<ChatsList data={this.state} />
+					<UsersList data={this.state} />
 				</aside>
 				<div
 					className={styles['main-part']}
 					style={this.state.isToggleOn ? expandWidth : {}}
-				>
-					<ChatsDetails />
+				>	
+					{/*<ChatsDetails />*/}
+
+					<MessagesNavbar />
+					<MessagesList />
+					<MessagesInput />
 				</div>
 			</div>
 		);

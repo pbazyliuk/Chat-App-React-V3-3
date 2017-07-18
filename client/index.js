@@ -10,7 +10,8 @@ import defaultReducer from './src/reducers/index';
 import { reducer as formReducer } from 'redux-form';
 
 import {
-	AUTH_USER
+	AUTH_USER,
+	GET_MESSAGES
 }	from './src/actionsTypes/index';
 
 // Components
@@ -31,6 +32,7 @@ const store = createStoreWithMiddleware(rootReducer);
 
 if(token) {
 	store.dispatch( {type: AUTH_USER} );
+	// store.dispatch( {type: GET_MESSAGES });
 }
 
 ReactDOM.render(

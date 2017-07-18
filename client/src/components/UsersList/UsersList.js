@@ -1,14 +1,14 @@
 import React from 'react'
-import ChatsItem from '../ChatsItem/ChatsItem'
+import User from '../User/User'
 import preload from '../../data/chats.json'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 
-import styles from './ChatsList.scss'
+import styles from './UsersList.scss'
 
-class ChatsList extends React.Component {
+class UsersList extends React.Component {
   constructor(props) {
     super(props);
     
@@ -30,7 +30,7 @@ class ChatsList extends React.Component {
       <ul className={styles ['chat-list']} style={this.props.data.isMenuShown ? isVisible : {}}>
         {users.map(function (user) {
           return (
-            <ChatsItem {...user} key={user._id} />
+            <User {...user} key={user._id} />
             
           )
         })}
@@ -48,4 +48,4 @@ function mapStateToprops(state) {
   return {users: state.applicationState.storeData.users, authenticated: state.applicationState.uiState.authenticated }
 }
 
-export default connect(mapStateToprops, actions)(ChatsList);
+export default connect(mapStateToprops, actions)(UsersList);
