@@ -1,5 +1,7 @@
 import INITIAL_APPLICATION_STATE from '../store/initialState.js';
 
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR } from '../actionsTypes/index.js';
+
 export default function(state = INITIAL_APPLICATION_STATE, action) {
 	switch (action.type) {
 		case AUTH_USER: {
@@ -35,16 +37,6 @@ export default function(state = INITIAL_APPLICATION_STATE, action) {
 
 		case AUTH_ERROR:
 			return { ...state, error: action.payload };
-
-		case GET_ALL_USERS: {
-			console.log('get all users');
-
-			let clonedState = { ...state };
-
-			clonedState.storeData.users = action.payload;
-
-			return clonedState;
-		}
 
 		default:
 			return state;

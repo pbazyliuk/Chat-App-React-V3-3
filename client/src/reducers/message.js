@@ -1,5 +1,7 @@
 import INITIAL_APPLICATION_STATE from '../store/initialState.js';
 
+import { SEND_MESSAGE, GET_MESSAGES } from '../actionsTypes/index.js';
+
 export default function(state = INITIAL_APPLICATION_STATE, action) {
 	switch (action.type) {
 		case SEND_MESSAGE: {
