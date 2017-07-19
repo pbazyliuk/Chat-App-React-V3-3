@@ -3,14 +3,14 @@
     margin-bottom: 24px;
 }
 
-.user-message-author:nth-child(odd) {
+.user-message-author {
     align-self: flex-start;
     margin-bottom: 24px;
     max-width: 60%;
     min-width: 15%;
 }
 
-.user-message-author:nth-child(even) {
+.user-message-friend {
     align-self: flex-end;
     margin-bottom: 24px;
     max-width: 60%;
@@ -59,6 +59,11 @@
 .user-message-friend .user-message__text-cotainer {
     order: -1;
     background: #cccccc;
+}
+
+.user-message-friend .user-message__text-cotainer-active {
+    background: #989ad7;
+    order: -1;
 }
 
 .user-message__text-author {

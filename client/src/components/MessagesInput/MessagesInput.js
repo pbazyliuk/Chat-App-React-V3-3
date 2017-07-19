@@ -64,6 +64,7 @@ class MessagesInput extends React.Component {
 						onChange={this.handleChange}
 						className={styles['message-input']}
 						placeholder="Input your message"
+						required
 					/>
 					<button className={styles['message-btn-submit']}>Send</button>
 				</form>

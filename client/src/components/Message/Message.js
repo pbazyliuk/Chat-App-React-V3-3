@@ -6,13 +6,19 @@ import styles from './Message.scss';
 
 class Message extends React.Component {
 	render() {
-		const { text, sentAt, userName, isLogged } = this.props;
+		const { text, sentAt, userName, isLogged, firstname } = this.props;
 
-		// console.log(this.props);
+		console.log(this.props);
 		// console.log(users);
 
 		return (
-			<li className={styles['user-message-author']}>
+			<li
+				className={
+					firstname === userName
+						? styles['user-message-author']
+						: styles['user-message-friend']
+				}
+			>
 				<div className={styles['user-message-wrapper']}>
 					<div className={styles['avatar']}>
 						{/* <img class='avatar__img' src='../../../images/user-on-avatar.png' alt='avatar-image' /> */}

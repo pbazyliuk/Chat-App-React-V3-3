@@ -23,7 +23,7 @@ class MessagesList extends React.Component {
 	}
 
 	get messages() {
-		const { searchMessage, users } = this.props;
+		const { searchMessage, users, firstname } = this.props;
 		var { messages } = this.props;
 
 		console.log('MESSAGES before', messages);
@@ -76,7 +76,7 @@ class MessagesList extends React.Component {
 						return true;
 					})
 					.map(message => {
-						return <Message {...message} />;
+						return <Message {...message} firstname={firstname} />;
 					})}
 			</ul>
 		);
@@ -109,7 +109,8 @@ const mapStateToProps = state => {
 	return {
 		messages: state.messages,
 		searchMessage: state.search.searchMessageValue,
-		users: state.users
+		users: state.users,
+		firstname: state.auth.user.firstname
 	};
 };
 
