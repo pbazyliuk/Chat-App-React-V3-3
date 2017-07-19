@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Message from '../Message/Message';
-
+import { Map } from 'immutable';
 import MESSAGES from '../../data/messages.js';
 import PropTypes from 'prop-types';
 
@@ -107,10 +107,10 @@ class MessagesList extends React.Component {
 
 const mapStateToProps = state => {
 	return {
-		messages: state.messages,
-		searchMessage: state.search.searchMessageValue,
-		users: state.users,
-		firstname: state.auth.user.firstname
+		messages: state.get('messages'),
+		searchMessage: state.search.get('searchMessageValue'),
+		users: state.get('users'),
+		firstname: state.auth.user.get('firstname')
 	};
 };
 

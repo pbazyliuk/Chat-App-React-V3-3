@@ -21,12 +21,14 @@ import Chats from '../components/Chats/Chats';
 import PageNotFound from '../components/PageNotFound/PageNotFound';
 import AuthContainer from './AuthContainer';
 import Protected from '../components/Protected/Protected';
+import { Map } from 'immutable';
 
 class AppContainer extends React.Component {
 	constructor(props) {
 		super(props);
 	}
 	render() {
+		console.log('APP', this.props);
 		// const { dispatch, state } = this.props;
 		// const defaultAction = bindActionCreators(actionCreators.defaultAction, dispatch);
 		// console.error(this.props);
@@ -37,13 +39,8 @@ class AppContainer extends React.Component {
 					<Navbar />
 					<Switch>
 						<Route exact path="/" component={Home} />
-						<Route
-							path="/chat"
-							render={() => Protected(this.props, <Chats />, '/auth/login', true) } />}
-						/>
-
+						<Route path="/chat" component={Chats} />
 						<Route path="/auth" component={AuthContainer} />
-						
 						<Route path="/:params" component={PageNotFound} />
 					</Switch>
 				</div>

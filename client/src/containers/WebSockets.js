@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
 import * as ws from '../utils/utils';
+import { Map } from 'immutable';
 
 class WebSockets extends React.Component {
 	constructor(props) {
@@ -52,7 +53,7 @@ class WebSockets extends React.Component {
 }
 
 const mapStateToProps = state => {
-	return { user: state.auth.user };
+	return { user: state.auth.get('user') };
 };
 
 export default connect(mapStateToProps, actions)(WebSockets);

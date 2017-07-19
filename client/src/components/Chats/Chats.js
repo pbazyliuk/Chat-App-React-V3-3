@@ -9,9 +9,9 @@ import MessagesNavbar from '../MessagesNavbar/MessagesNavbar';
 import MessagesList from '../MessagesList/MessagesList';
 import MessagesInput from '../MessagesInput/MessagesInput';
 
-import * as actions from '../../actions/index';
+// import * as actions from '../../actions/index';
 
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 import styles from './Chats.scss';
 
@@ -84,8 +84,10 @@ class Chats extends React.Component {
 	}
 }
 
-const mapStateToProps = state => {
-	return { messages: state.messages };
-};
+// const mapStateToProps = state => {
+// 	return { messages: state.messages.get() };
+// };
 
-export default connect(mapStateToProps, actions)(Chats);
+export default Chats;
+
+// export default connect(mapStateToProps, actions)(Chats);

@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-
+import { Map } from 'immutable';
 import styles from './Login.scss';
 
 function validate(values) {
@@ -139,7 +139,7 @@ Login = reduxForm({
 })(Login);
 
 Login = connect(state => ({
-	value: state.auth.error // pull initial values from account reducer
+	value: state.auth.get('error') // pull initial values from account reducer
 }))(Login);
 
 export default Login;

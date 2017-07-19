@@ -73,6 +73,6 @@ class MessagesInput extends React.Component {
 	}
 }
 
-const mapStateToProps = state => state;
+// const mapStateToProps = state => state;
 
-export default connect(mapStateToProps, actions)(MessagesInput);
+export default connect(null, actions)(MessagesInput);

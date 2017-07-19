@@ -8,20 +8,17 @@ import {
 	withRouter
 } from 'react-router-dom';
 import Chats from '../Chats/Chats';
+import { Map } from 'immutable';
 
 const Protected = (props, Component, url, boolVal) => {
-	// console.log(props)
+	console.log(props);
 	let isProtected = props.state.auth.authenticated;
-		// debugger
-		if(boolVal) {
-			return isProtected === true ? Component : <Redirect to={`${url}`} push />;
-		}
-		else {
-			return isProtected === true ? <Redirect to={`${url}`} push /> : Component;
-		}	
-
-	
-	
+	// debugger
+	if (boolVal) {
+		return isProtected === true ? Component : <Redirect to={`${url}`} push />;
+	} else {
+		return isProtected === true ? <Redirect to={`${url}`} push /> : Component;
+	}
 };
 
 export default Protected;

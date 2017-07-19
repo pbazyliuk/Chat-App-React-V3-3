@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
+import { Map } from 'immutable';
 
 import styles from './UsersList.scss';
 
@@ -23,8 +24,10 @@ class UsersList extends React.Component {
 			display: 'none'
 		};
 
-		const { users, filterVal } = this.props;
-		// console.log(filterVal);
+		const { filterVal } = this.props;
+		const users = this.props.users;
+
+		console.log('USERS LIST', users);
 		return (
 			<ul
 				className={styles['chat-list']}
@@ -58,9 +61,9 @@ class UsersList extends React.Component {
 
 function mapStateToprops(state) {
 	return {
-		users: state.users,
-		authenticated: state.auth.authenticated,
-		filterVal: state.search.searchUserValue
+		users: state.users.get(),
+		authenticated: state.auth.get('authenticated'),
+		filterVal: state.search.get('searchUserValue')
 	};
 }
 

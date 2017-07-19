@@ -41,6 +41,7 @@ class AuthContainer extends React.Component {
 
 	render() {
 		let { match } = this.props;
+		console.log('MATCH', match);
 
 		return (
 			<div>

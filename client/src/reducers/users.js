@@ -1,11 +1,10 @@
-import INITIAL_APPLICATION_STATE from '../store/initialState.js';
-
 import { GET_ALL_USERS } from '../actionsTypes/index.js';
+import { List } from 'immutable';
 
-export default function(state = [], action) {
+export default function(state = List([]), action) {
 	switch (action.type) {
 		case GET_ALL_USERS: {
-			return [...action.payload];
+			return List([...action.payload]);
 		}
 
 		default:
