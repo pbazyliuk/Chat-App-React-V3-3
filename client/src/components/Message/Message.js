@@ -6,20 +6,46 @@ import styles from './Message.scss';
 
 class Message extends React.Component {
 	render() {
-		const { text, sentAt, userName } = this.props.message;
+		const { text, sentAt, userName, isLogged } = this.props;
+
+		// console.log(this.props);
+		// console.log(users);
+
 		return (
 			<li className={styles['user-message-author']}>
 				<div className={styles['user-message-wrapper']}>
 					<div className={styles['avatar']}>
 						{/* <img class='avatar__img' src='../../../images/user-on-avatar.png' alt='avatar-image' /> */}
 						<img
-							className={styles['avatar__img']}
+							className={
+								isLogged === true
+									? `${styles['avatar__img']} ${styles['hide']}`
+									: `${styles['avatar__img']} ${styles['show']}`
+							}
 							src="../../../images/user-off-avatar.png"
 							alt="avatar-image"
 						/>
+
+						<img
+							className={
+								isLogged === true
+									? `${styles['avatar__img']} ${styles['show']}`
+									: `${styles['avatar__img']} ${styles['hide']}`
+							}
+							src="../../../images/user-on-avatar.png"
+							alt="avatar-image"
+						/>
 					</div>
-					<div className={styles['user-message__text-cotainer']}>
-						<span className={styles['user-message__text-author']}>{userName}</span>
+					<div
+						className={
+							isLogged === true
+								? styles['user-message__text-cotainer-active']
+								: styles['user-message__text-cotainer']
+						}
+					>
+						<span className={styles['user-message__text-author']}>
+							{userName}
+						</span>
 						<div className={styles['user-message__text-message']}>
 							{text}
 						</div>

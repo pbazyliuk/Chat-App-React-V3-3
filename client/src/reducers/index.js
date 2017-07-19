@@ -127,11 +127,10 @@ import usersReducer from './users';
 
 const rootReducer = combineReducers({
 	form: formReducer,
-	applicationState: 
-	authReducer,
-	messageReducer,
-	searchReducer,
-	usersReducer
+	auth: authReducer,
+	messages: messageReducer,
+	search: searchReducer,
+	users: usersReducer
 });
 
 export default rootReducer;

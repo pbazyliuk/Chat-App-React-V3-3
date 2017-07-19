@@ -58,9 +58,9 @@ class UsersList extends React.Component {
 
 function mapStateToprops(state) {
 	return {
-		users: state.applicationState.storeData.users,
-		authenticated: state.applicationState.uiState.authenticated,
-		filterVal: state.applicationState.uiState.searchUserValue
+		users: state.users,
+		authenticated: state.auth.authenticated,
+		filterVal: state.search.searchUserValue
 	};
 }
 

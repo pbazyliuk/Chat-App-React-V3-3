@@ -11,7 +11,7 @@ import Chats from '../Chats/Chats';
 
 const Protected = (props, Component, url, boolVal) => {
 	// console.log(props)
-	let isProtected = props.state.applicationState.uiState.authenticated;
+	let isProtected = props.state.auth.authenticated;
 		// debugger
 		if(boolVal) {
 			return isProtected === true ? Component : <Redirect to={`${url}`} push />;

@@ -15,14 +15,17 @@ exports.login = function(req, res, next) {
 
 	User.findOne(
 		{ email: req.user.email },
-		{ _id: 1, firstname: 1, lastname: 1, email: 1 },
+		{ _id: 1, firstname: 1, lastname: 1, email: 1, isLogged: 1 },
 		function(err, curUser) {
 			if (err) {
 				return next(err);
 			}
 
-			if (curUser) {
+			console.log('LOGIN', curUser);
+			if (!curUser.isLogged && curUser) {
 				res.send({ token: tokenForUser(req.user), user: curUser });
+			} else {
+				res.status(422).send({ error: 'User has already been logged!' });
 			}
 		}
 	);

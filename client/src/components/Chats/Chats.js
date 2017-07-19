@@ -1,7 +1,6 @@
 import React from 'react';
 import ChatsNavbar from '../ChatsNavbar/ChatsNavbar';
 import UsersList from '../UsersList/UsersList';
-import ChatsDetails from '../ChatsDetails/ChatsDetails';
 import ChatsMenu from '../ChatsMenu/ChatsMenu';
 
 import WebSockets from '../../containers/WebSockets';
@@ -86,7 +85,7 @@ class Chats extends React.Component {
 }
 
 const mapStateToProps = state => {
-	return { messages: state.applicationState.storeData.messages };
+	return { messages: state.messages };
 };
 
 export default connect(mapStateToProps, actions)(Chats);

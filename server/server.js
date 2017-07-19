@@ -1,3 +1,5 @@
+const Message = require('./models/message');
+
 //Main starting point
 const express = require('express');
 // import express from 'express';
@@ -63,6 +65,11 @@ io.sockets
 
 		function chatMessageHandler(message) {
 			console.log('message', message);
+
+			Message.create(message, function(err, msg) {
+				if (err) return err;
+			});
+
 			io.emit('message', {
 				userId: message.userId,
 				text: message.text,

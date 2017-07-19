@@ -23,13 +23,16 @@ import './style.scss';
 // 	form: formReducer
 // });
 
-console.error(rootReducer);
+// console.error(rootReducer);
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const token = localStorage.getItem('token');
 
 const store = createStoreWithMiddleware(rootReducer);
 
+// setInterval(()=>{
+// 	console.log(JSON.stringify(store.getState()))
+// }, 1000);
 if (token) {
 	store.dispatch({ type: AUTH_USER });
 }

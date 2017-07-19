@@ -139,7 +139,7 @@ Login = reduxForm({
 })(Login);
 
 Login = connect(state => ({
-	value: state.applicationState.error // pull initial values from account reducer
+	value: state.auth.error // pull initial values from account reducer
 }))(Login);
 
 export default Login;

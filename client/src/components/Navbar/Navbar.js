@@ -13,7 +13,7 @@ class Navbar extends React.Component {
 	}
 	render() {
 		const isProtected =
-			this.props.state.applicationState.uiState.authenticated || false;
+			this.props.state.auth.authenticated || false;
 		return (
 			<nav className={styles['navbar']}>
 				<div className={styles['navbar__logo-container']}>

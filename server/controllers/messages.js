@@ -9,7 +9,7 @@ exports.getAllMessages = function(req, res) {
 };
 
 exports.createMessage = function(req, res) {
-	// console.log(req.body);
+	console.log(req.body);
 	Message.create(req.body, function(err, message) {
 		if (err) return err;
 

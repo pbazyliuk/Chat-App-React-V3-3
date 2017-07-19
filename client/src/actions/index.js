@@ -12,7 +12,8 @@ import {
 	LEAVE_CHAT,
 	GET_MESSAGES,
 	SEARCH_MESSAGE_VAL,
-	SEARCH_USER_VAL
+	SEARCH_USER_VAL,
+	SAVE_AUTH_USER
 } from '../actionsTypes/index.js';
 
 const ROOT_URL = 'http://localhost:8090';
@@ -24,6 +25,7 @@ export function registerUser({ firstname, lastname, email, password }) {
 			.post(`${ROOT_URL}/register`, { firstname, lastname, email, password })
 			.then(response => {
 				localStorage.setItem('token', response.data.token);
+				localStorage.setItem('user', JSON.stringify(response.data.user));
 				dispatch({ type: AUTH_USER, payload: response.data.user });
 
 				history.push('/chat');
@@ -46,6 +48,7 @@ export function loginUser({ email, password }) {
 				// - Update state to indicate user is authenticated
 				// - Save the JWT token
 				localStorage.setItem('token', response.data.token);
+				localStorage.setItem('user', JSON.stringify(response.data.user));
 
 				dispatch({ type: AUTH_USER, payload: response.data.user });
 
@@ -59,6 +62,8 @@ export function loginUser({ email, password }) {
 			});
 	};
 }
+
+function saveAuthUser() {}
 
 export function authError(error) {
 	return {
@@ -102,25 +107,10 @@ export function getAllUsers() {
 }
 
 export function sendMessage(data) {
-	saveMessageToBase(data);
 	return function(dispatch) {
 		console.log('send message', data);
 		dispatch({ type: SEND_MESSAGE, payload: data });
 	};
-}
-
-function saveMessageToBase(data) {
-	return axios
-		.post(`${ROOT_URL}/api/messages`, data)
-		.then(response => {
-			// If request is good...
-			// - Update state to indicate user is authenticated
-		})
-		.catch(() => {
-			// If request is bad...
-			// - Show an error to the user
-			dispatch(authError('Some problems occurs with users send message!'));
-		});
 }
 
 export function getMessages() {

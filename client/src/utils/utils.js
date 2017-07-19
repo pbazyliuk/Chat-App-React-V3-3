@@ -56,12 +56,12 @@ function onMessage(msg) {
 
 function onJoin(username) {
 	console.log('onJoin', username);
-	//fireListeners('join', username);
+	fireListeners('join', username);
 }
 
 function onLeave(username) {
 	console.log('onLeave');
-	//fireListeners('leave', username);
+	fireListeners('leave', username);
 }
 
 function disconnect() {

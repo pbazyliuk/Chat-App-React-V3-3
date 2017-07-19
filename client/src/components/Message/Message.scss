@@ -1,4 +1,3 @@
-
 .user-message {
     width: 45%;
     margin-bottom: 24px;
@@ -37,8 +36,18 @@
     margin-right: 24px;
 }
 
-.user-message__text-cotainer {
+.user-message__text-cotainer-active {
     background: #989ad7;
+    color: #fff;
+    padding: 20px 24px;
+    min-height: 60px;
+    flex-grow: 1;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.user-message__text-cotainer {
+    background: #cccccc;
     color: #fff;
     padding: 20px 24px;
     min-height: 60px;
@@ -55,8 +64,7 @@
 .user-message__text-author {
     font-size: 16px;
     font-weight: 400;
-    text-align: left;
-    // color: #3b3e99;
+    text-align: left; // color: #3b3e99;
 }
 
 .user-message__text-message {
@@ -87,4 +95,12 @@
 
 .user-message__date {
     color: #3b3e99;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
 }

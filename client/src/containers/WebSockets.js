@@ -12,15 +12,23 @@ class WebSockets extends React.Component {
 		const { user } = this.props;
 
 		if (user) {
-			const { sendMessage, joinChat, leaveChat } = this.props;
+			const {
+				sendMessage,
+				joinChat,
+				leaveChat,
+				getAllUsers,
+				getMessages
+			} = this.props;
 			console.log(this.props);
 			console.error('COMPONENT WILL MOUNT');
 
 			ws.initConnection();
 
 			ws.addListener('message', sendMessage);
-			ws.addListener('join', joinChat);
-			ws.addListener('leave', leaveChat);
+			ws.addListener('join', getAllUsers);
+			ws.addListener('join', getMessages);
+			ws.addListener('leave', getAllUsers);
+			ws.addListener('leave', getMessages);
 		}
 	}
 
@@ -44,7 +52,7 @@ class WebSockets extends React.Component {
 }
 
 const mapStateToProps = state => {
-	return { user: state.applicationState.uiState.user };
+	return { user: state.auth.user };
 };
 
 export default connect(mapStateToProps, actions)(WebSockets);

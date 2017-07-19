@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 
 import * as actions from '../../actions/index';
 
+// import getOnlineUser from '../../utils/getOnlineUser';
+
 import styles from './MessagesList.scss';
 
 class MessagesList extends React.Component {
@@ -20,12 +22,44 @@ class MessagesList extends React.Component {
 		this.props.getMessages();
 	}
 
-	// componentWillReceiveProps() {
-	// 	this.props.getMessages();
-	// }
-
 	get messages() {
-		const { messages, searchMessage } = this.props;
+		const { searchMessage, users } = this.props;
+		var { messages } = this.props;
+
+		console.log('MESSAGES before', messages);
+		console.log('USERS', users);
+
+		function unLoggedUserInMes(messages) {
+			return messages.map(item => {
+				return (item.isLogged = false);
+			});
+		}
+
+		function foo(messages, users) {
+			// var newMsgs = [];
+			unLoggedUserInMes(messages);
+			for (let i = 0; i < users.length; i++) {
+				if (users[i].isLogged) {
+					for (let j = 0; j < messages.length; j++) {
+						console.log(
+							'AAA',
+							users[i].firstname,
+							messages[j].userName,
+							users[i].firstname == messages[j].userName
+						);
+						if (users[i].firstname === messages[j].userName) {
+							// newMsgs.push(messages[j]);
+							// newMsgs[newMsgs.length - 1].isLogged = true;
+							messages[j].isLogged = true;
+						}
+					}
+				}
+			}
+			console.log('MESSAGES after', messages);
+			return messages;
+		}
+
+		foo(messages, users);
 
 		return (
 			<ul className={styles['message-list']}>
@@ -42,7 +76,7 @@ class MessagesList extends React.Component {
 						return true;
 					})
 					.map(message => {
-						return <Message message={message} />;
+						return <Message {...message} />;
 					})}
 			</ul>
 		);
@@ -73,8 +107,9 @@ class MessagesList extends React.Component {
 
 const mapStateToProps = state => {
 	return {
-		messages: state.applicationState.storeData.messages,
-		searchMessage: state.applicationState.uiState.searchMessageValue
+		messages: state.messages,
+		searchMessage: state.search.searchMessageValue,
+		users: state.users
 	};
 };
 
