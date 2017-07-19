@@ -39,7 +39,12 @@ class AppContainer extends React.Component {
 					<Navbar />
 					<Switch>
 						<Route exact path="/" component={Home} />
-						<Route path="/chat" component={Chats} />
+						<Route
+							path="/chat"
+							render={() => {
+								var self = this;
+								return Protected(self.props, <Chats />, '/auth/login', true)} } />}
+						/>
 						<Route path="/auth" component={AuthContainer} />
 						<Route path="/:params" component={PageNotFound} />
 					</Switch>
@@ -50,7 +55,7 @@ class AppContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	state: state
+	state
 });
 
 export default connect(mapStateToProps)(AppContainer);

@@ -27,6 +27,7 @@ class UsersList extends React.Component {
 		const { filterVal } = this.props;
 		const users = this.props.users;
 
+		console.log(this.props);
 		console.log('USERS LIST', users);
 		return (
 			<ul
@@ -61,7 +62,7 @@ class UsersList extends React.Component {
 
 function mapStateToprops(state) {
 	return {
-		users: state.users.get(),
+		users: [...state.users],
 		authenticated: state.auth.get('authenticated'),
 		filterVal: state.search.get('searchUserValue')
 	};

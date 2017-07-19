@@ -12,7 +12,7 @@ import { Map } from 'immutable';
 
 const Protected = (props, Component, url, boolVal) => {
 	console.log(props);
-	let isProtected = props.state.auth.authenticated;
+	let isProtected = props.state.auth.get('authenticated');
 	// debugger
 	if (boolVal) {
 		return isProtected === true ? Component : <Redirect to={`${url}`} push />;

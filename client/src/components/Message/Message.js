@@ -45,14 +45,14 @@ class Message extends React.Component {
 					<div
 						className={
 							isLogged === true
-								? styles['user-message__text-cotainer-active']
+								? firstname === userName ? styles['user-message__text-cotainer-active-author'] : styles['user-message__text-cotainer-active']
 								: styles['user-message__text-cotainer']
 						}
 					>
 						<span className={styles['user-message__text-author']}>
 							{userName}
 						</span>
-						<div className={styles['user-message__text-message']}>
+						<div className={ firstname === userName ? styles['user-message__text-message-author'] : styles['user-message__text-message']}>
 							{text}
 						</div>
 					</div>

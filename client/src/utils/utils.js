@@ -65,8 +65,8 @@ function onLeave(username) {
 }
 
 function disconnect() {
-	socket.close();
-	// socket.disconnect();
+	// socket.close();
+	socket.disconnect();
 	socket = null;
 	listeners = {};
 }

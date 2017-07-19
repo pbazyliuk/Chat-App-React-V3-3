@@ -36,8 +36,20 @@
     margin-right: 24px;
 }
 
+
+
 .user-message__text-cotainer-active {
     background: #989ad7;
+    color: #fff;
+    padding: 20px 24px;
+    min-height: 60px;
+    flex-grow: 1;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.user-message__text-cotainer-active-author {
+    background: #3b3e99;
     color: #fff;
     padding: 20px 24px;
     min-height: 60px;
@@ -61,6 +73,7 @@
     background: #cccccc;
 }
 
+
 .user-message-friend .user-message__text-cotainer-active {
     background: #989ad7;
     order: -1;
@@ -70,6 +83,13 @@
     font-size: 16px;
     font-weight: 400;
     text-align: left; // color: #3b3e99;
+}
+
+.user-message__text-message-author {
+    font-size: 14px;
+    font-weight: 500;
+    color: #989ad7;
+    line-height: 130%;
 }
 
 .user-message__text-message {

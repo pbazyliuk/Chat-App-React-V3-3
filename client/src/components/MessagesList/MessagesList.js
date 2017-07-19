@@ -107,10 +107,10 @@ class MessagesList extends React.Component {
 
 const mapStateToProps = state => {
 	return {
-		messages: state.get('messages'),
+		messages: [...state.messages],
 		searchMessage: state.search.get('searchMessageValue'),
-		users: state.get('users'),
-		firstname: state.auth.user.get('firstname')
+		users: [...state.users],
+		firstname: state.auth.getIn(['user', 'firstname'])
 	};
 };
 
