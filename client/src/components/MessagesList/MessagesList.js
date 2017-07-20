@@ -76,14 +76,14 @@ class MessagesList extends React.Component {
 						return true;
 					})
 					.map(message => {
-						return <Message {...message} firstname={firstname} />;
+						return <Message key={message._id} {...message} firstname={firstname} />;
 					})}
 			</ul>
 		);
 	}
 
 	render() {
-		console.error('MESSAGES LIST', this.props);
+		// console.error('MESSAGES LIST', this.props);
 		// const { searchMessage } = this.props;
 		// console.log(searchMessage);
 		// console.log(messages);

@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { connect } from 'react-redux'
+
 import { Field, reduxForm } from 'redux-form';
-import styles from '../../../style.scss'
+import styles from './ChatsMenu.scss'
 
 function validate(values) {
 	
@@ -10,16 +12,15 @@ function validate(values) {
 
 	if(!values.chatName) {
 		errors.chatName = 'Chatname is required'
-	} else if (values.chatName.length > 30) {
-    errors.chatName = 'Must be 30 characters or less'
-  } else if (values.chatName.length < 6) {
-    errors.chatName = 'Must be at least 6 characters'
+	} else if (values.chatName.length > 15) {
+    errors.chatName = 'Must be 15 characters or less'
+  } else if (values.chatName.length < 4) {
+    errors.chatName = 'Must be at least 4 characters'
   }
-
-  // if(!values.users) {
-	// 	errors.users = 'users is required'
-	// }
-
+  
+	if(!values.users) {
+		errors.users = 'Users is required'
+	}
 
 	return errors;
 }
@@ -53,21 +54,23 @@ return <div>
 }
 
 const renderFieldSelect = ({
-  select,
+  input,
   meta: { touched, error, warning  },
   className,
-  name
+  name,
+  dataUsers,
+  dataCurUser
 }) => {
-  let users = ['Tom', 'Sam', 'Donald', 'Ola', 'Mike'];
-  let usersHtml = users.map((user) => {
-    return <option key={user} >
-              {user}
+  dataUsers = dataUsers.filter(user => user.firstname !== dataCurUser.get('firstname'))
+  let usersHtml = dataUsers.map((user) => {
+    return <option key={user._id} value={user._id}>
+              {user.firstname}
            </option>
   })
   return (
     <div>    
       <div>
-        <select {...select} className={className} size={'5'} name={name} multiple>
+        <select {...input} className={className} size={'5'} name={name} multiple>
          {usersHtml}
         </select>
         {touched &&
@@ -92,8 +95,8 @@ class ChatsMenu extends React.Component {
   }
 
   render () {
-    const { handleSubmit, valid, pristine } = this.props;
-    // console.error(valid)
+    const { handleSubmit, valid, pristine, users, curUser } = this.props;
+    console.error('')
     const isVisible = {
       display: 'none'
     }
@@ -107,7 +110,7 @@ class ChatsMenu extends React.Component {
             <span className='btn-arrow-sm' />
           </label>
           <div className='user-menu__item-info' >
-            <form className='form-add-chat' action=''>
+            <form className='form-add-chat' action='' onSubmit={handleSubmit}>
               <div className='form-add-chat__container'>
                 <label className='form-add-chat__label' htmlFor='emailId'>Chat Name</label>
                 <Field 
@@ -117,26 +120,21 @@ class ChatsMenu extends React.Component {
                   id='emailId'
                   component={renderField} 
                   placeholder='Chat Name (required)'
-                  pattern='.{4,}'
                 />
-                {/* <div class='text-has-error'>
-                    Chatname is required (min 4 characters)
-                </div> */}
               </div>
 
               <div className='form-add-chat__container'>
                 
-                <label htmlFor='selectUsersId' className='form-add-chat__label'>Select Users</label>
+                <label htmlFor='usersId' className='form-add-chat__label'>Select Users</label>
                     <Field 
                       className='form-add-chat__select-field'
                       name='users' 
                       component={renderFieldSelect} 
-                     
-                      id='usersIds' 
+                      dataUsers={users}
+                      dataCurUser={curUser}
+                      id='usersId' 
+                      value={curUser}
                       />
-                      {/* <option>Ivan</option>
-                      <option>Sam</option>
-                      <option>Donald</option> */}
                 </div>
 
                 <button type='submit' disabled={ !valid } className='form-add-chat__btn-submit' >ADD CHAT</button>
@@ -157,5 +155,12 @@ ChatsMenu = reduxForm({
 	form: 'addChat',
 	validate
 })(ChatsMenu)
+
+ChatsMenu = connect(
+	state => ({
+		users: [...state.users],
+		curUser: state.auth.get('user')
+	}) // pull initial values from account reducer
+)(ChatsMenu);
 
 export default ChatsMenu

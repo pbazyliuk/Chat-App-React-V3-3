@@ -8,7 +8,7 @@ class Message extends React.Component {
 	render() {
 		const { text, sentAt, userName, isLogged, firstname } = this.props;
 
-		console.log(this.props);
+		// console.log(this.props);
 		// console.log(users);
 
 		return (
@@ -72,8 +72,8 @@ class Message extends React.Component {
 	}
 }
 
-Message.propTypes = {
-	message: PropTypes.object.isRequired
-};
+// Message.propTypes = {
+// 	message: PropTypes.object.isRequired
+// };
 
 export default Message;
