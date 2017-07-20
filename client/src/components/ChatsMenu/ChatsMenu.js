@@ -63,7 +63,7 @@ const renderFieldSelect = ({
 }) => {
   dataUsers = dataUsers.filter(user => user.firstname !== dataCurUser.get('firstname'))
   let usersHtml = dataUsers.map((user) => {
-    return <option key={user._id} value={user._id}>
+    return <option key={user._id} value={JSON.stringify(user)}>
               {user.firstname}
            </option>
   })
@@ -95,8 +95,7 @@ class ChatsMenu extends React.Component {
   }
 
   render () {
-    const { handleSubmit, valid, pristine, users, curUser } = this.props;
-    console.error('')
+    const { handleSubmit, valid, pristine, users, curUser, value } = this.props;
     const isVisible = {
       display: 'none'
     }
@@ -136,7 +135,15 @@ class ChatsMenu extends React.Component {
                       value={curUser}
                       />
                 </div>
-
+                {/*<div
+                  className={
+                    !value
+                      ? `${styles['hidden']}`
+                      : `${styles['isShown']} ${styles['login-error']}`
+                  }
+                >
+                  {value}
+                </div>*/}
                 <button type='submit' disabled={ !valid } className='form-add-chat__btn-submit' >ADD CHAT</button>
             </form>
           </div>

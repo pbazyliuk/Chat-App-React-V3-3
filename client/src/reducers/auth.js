@@ -27,6 +27,7 @@ export default function(
 		}
 		case AUTH_ERROR:
 			return state.set("error", action.payload);
+			
 		default:
 			return state;
 	}

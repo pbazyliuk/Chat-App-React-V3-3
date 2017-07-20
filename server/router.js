@@ -1,5 +1,6 @@
 const Authentication = require('./controllers/authentication');
 const Messages = require('./controllers/messages');
+const Chats = require('./controllers/Chats');
 
 const passportService = require('./services/passport');
 const passport = require('passport');
@@ -22,4 +23,10 @@ module.exports = function(app) {
 
     //Get all messages from main chat route
     app.get('/api/messages', Messages.getAllMessages);
+
+    //Get all private chats route
+    app.get('/api/chats', Chats.getAllChats);
+
+    //Create private chat route
+    app.post('/api/chats', Chats.createChat);
 }

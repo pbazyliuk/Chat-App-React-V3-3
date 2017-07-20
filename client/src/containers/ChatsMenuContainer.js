@@ -15,8 +15,13 @@ class ChatsMenuContainer extends React.Component {
 
     handleAddChat(values) {
         console.log(values);
-        let curUserId = JSON.parse(localStorage.getItem('user'))._id;
-        if(!values.users.includes(curUserId)) return values.users.push(curUserId)
+        console.log('999', this.props);
+        let curUserId = localStorage.getItem('user');
+        if(!values.users.includes(curUserId)) return values.users.push(curUserId);
+
+        this.props.addChat(values);
+
+        this.props.resetAddChatForm('addChat');
     }
 
     render() {
@@ -25,7 +30,9 @@ class ChatsMenuContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    state
+    return {
+        value: state.auth.get('error')
+    }
 }
 
 export default connect(mapStateToProps, actions)(ChatsMenuContainer);
