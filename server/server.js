@@ -1,4 +1,5 @@
 const Message = require('./models/message');
+const Chat = require('./models/chat');
 
 //Main starting point
 const express = require('express');
@@ -61,7 +62,43 @@ io.sockets
 
 		socket
 			.on('disconnect', disconnectHandler)
-			.on('message', chatMessageHandler);
+			.on('message', chatMessageHandler)
+			.on('chat', chatHandler);
+
+		function chatHandler(chat) {
+			console.log('chat', chat);
+
+			var obj = {
+				name: chat.chatName,
+				privateMessages: [],
+				usersIds: [],
+				usersNames: []
+			};
+
+			chat.users = chat.users
+				.map(user => {
+					return JSON.parse(user);
+				})
+				.forEach(user => {
+					obj.usersIds.push(user._id);
+					obj.usersNames.push(user.firstname);
+				});
+
+			console.log(obj);
+
+			// console.log('chat', chat);
+
+			Chat.create(obj, function(err, msg) {
+				if (err) return err;
+			});
+
+			io.emit('chat', {
+				name: obj.name,
+				privateMessages: [],
+				usersIds: obj.usersIds,
+				usersNames: obj.usersNames
+			});
+		}
 
 		function chatMessageHandler(message) {
 			console.log('message', message);

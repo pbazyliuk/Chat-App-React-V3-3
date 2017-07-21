@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { history } from '../history/history';
-import {reset} from 'redux-form';
+import { reset } from 'redux-form';
 import * as ws from '../utils/utils';
 
 import {
@@ -15,7 +15,8 @@ import {
 	SEARCH_MESSAGE_VAL,
 	SEARCH_USER_VAL,
 	SAVE_AUTH_USER,
-	ADD_CHAT
+	ADD_CHAT,
+	GET_ALL_CHATS
 } from '../actionsTypes/index.js';
 
 const ROOT_URL = 'http://localhost:8090';
@@ -123,8 +124,8 @@ export function getMessages() {
 				console.error('Get Messages', response.data);
 				dispatch({ type: GET_MESSAGES, payload: response.data });
 			})
-			.catch((e) => {
-				console.log('ERROR', e)
+			.catch(e => {
+				console.log('ERROR', e);
 				// If request is bad...
 				// - Show an error to the user
 				dispatch(authError('Some problems occurs with users send message!'));
@@ -144,19 +145,29 @@ export function searchMessageVal(value) {
 	};
 }
 
-
 export function addChat(data) {
 	return function(dispatch) {
 		// dispatch({ type: ADD_CHAT, payload: data });
-		console.log('add chat action')
+		console.log('add chat action');
+
+		dispatch({ type: ADD_CHAT, payload: data });
+	};
+}
+
+export function getAllChats(data) {
+	return function(dispatch) {
+		// dispatch({ type: ADD_CHAT, payload: data });
+		console.log('get chat action');
 		axios
-			.post(`${ROOT_URL}/api/chats`, data)
+			.get(`${ROOT_URL}/api/chats`)
 			.then(response => {
 				// If request is good...
 				// - Update state to indicate user is authenticated
-				console.error('Add Chat', response.data);
-				dispatch({ type: ADD_CHAT, payload: response.data });
-				
+				console.error('Get All Chats', response.data);
+				// resetAddChatForm('addChat');
+				dispatch({ type: GET_ALL_CHATS, payload: response.data });
+				// var error = '';
+				// dispatch({ type: SEND_MESSAGE, payload: '' });
 			})
 			.catch(() => {
 				// If request is bad...
@@ -167,8 +178,8 @@ export function addChat(data) {
 }
 
 export function resetAddChatForm(name) {
-	console.log('911')
+	console.log('911');
 	return function(dispatch) {
-		dispatch(reset(name)); 
-	}
+		dispatch(reset(name));
+	};
 }

@@ -1,5 +1,12 @@
 import io from 'socket.io-client';
-export { sendMessageWS, initConnection, addListener, socket, disconnect };
+export {
+	sendMessageWS,
+	initConnection,
+	addListener,
+	socket,
+	disconnect,
+	sendChat
+};
 
 let socket;
 let listeners = {};
@@ -29,18 +36,23 @@ function connect() {
 			.emit('authenticate', { token: localStorage.getItem('token') })
 			.on('join', function(val) {
 				console.log('join', val.user);
-				console.log(socket);
+
 				onJoin(val.user);
 			})
 			.on('leave', function(val) {
 				console.log('leave', val.user);
-				console.log(socket);
+
 				onLeave(val.user);
 			})
 			.on('message', function(message) {
 				console.log('message', message);
-				console.log(socket);
+
 				onMessage(message);
+			})
+			.on('chat', function(message) {
+				console.log('chat', message);
+
+				onChat(message);
 			});
 
 		// socket.on('message', onMessage);
@@ -52,6 +64,11 @@ function connect() {
 function onMessage(msg) {
 	console.log('onMessage', msg);
 	fireListeners('message', msg);
+}
+
+function onChat(msg) {
+	console.log('onChat', msg);
+	fireListeners('chat', msg);
 }
 
 function onJoin(username) {
@@ -74,6 +91,11 @@ function disconnect() {
 function send(message) {
 	console.log('send to server', message);
 	socket.emit('message', message);
+}
+
+function sendChat(chat) {
+	console.log('send to server chat', chat);
+	socket.emit('chat', chat);
 }
 
 function sendMessageWS(message) {

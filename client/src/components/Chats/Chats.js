@@ -8,6 +8,7 @@ import WebSockets from '../../containers/WebSockets';
 import MessagesNavbar from '../MessagesNavbar/MessagesNavbar';
 import MessagesList from '../MessagesList/MessagesList';
 import MessagesInput from '../MessagesInput/MessagesInput';
+import ChatsList from '../ChatsList/ChatsList';
 
 // import * as actions from '../../actions/index';
 
@@ -66,7 +67,8 @@ class Chats extends React.Component {
 						onMenuShow={this.handleMenuShow}
 						data={this.state}
 					/>
-					<ChatsMenuContainer data={this.state} />
+					<ChatsMenuContainer data={this.state} onMenuShow={this.handleMenuShow}/>
+					<ChatsList data={this.state} />
 					<UsersList data={this.state} />
 				</aside>
 				<div

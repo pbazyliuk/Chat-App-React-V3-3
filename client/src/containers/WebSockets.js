@@ -18,7 +18,9 @@ class WebSockets extends React.Component {
 				joinChat,
 				leaveChat,
 				getAllUsers,
-				getMessages
+				getMessages,
+				getAllChats,
+				addChat
 			} = this.props;
 			console.log(this.props);
 			console.error('COMPONENT WILL MOUNT');
@@ -26,8 +28,12 @@ class WebSockets extends React.Component {
 			ws.initConnection();
 
 			ws.addListener('message', sendMessage);
+			ws.addListener('chat', addChat);
+
 			ws.addListener('join', getAllUsers);
 			ws.addListener('join', getMessages);
+			ws.addListener('join', getAllChats);
+
 			ws.addListener('leave', getAllUsers);
 			ws.addListener('leave', getMessages);
 		}

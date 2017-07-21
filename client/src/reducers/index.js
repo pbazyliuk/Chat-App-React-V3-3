@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
 	messages: messageReducer,
 	search: searchReducer,
 	users: usersReducer,
-	chat: chatsReducer
+	chats: chatsReducer
 });
 
 export default rootReducer;
