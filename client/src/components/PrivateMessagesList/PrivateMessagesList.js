@@ -9,9 +9,9 @@ import * as actions from '../../actions/index';
 
 // import getOnlineUser from '../../utils/getOnlineUser';
 
-import styles from './MessagesList.scss';
+import styles from './PrivateMessagesList.scss';
 
-class MessagesList extends React.Component {
+class PrivateMessagesList extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -64,26 +64,27 @@ class MessagesList extends React.Component {
 		return (
 			<div>
 				<h2 className={styles['main-chat-header']}>
-					Wellcome to the Main Chat
+					Wellcome to the Private Chat
 				</h2>
 				<ul className={styles['message-list']}>
-					{messages
-						.filter(message => {
-							// console.log(filterVal);
-							if (searchMessage !== '') {
-								const regex = new RegExp(searchMessage, 'i');
-								if (regex.test(message.text) || regex.test(message.userName)) {
-									return true;
-								}
-								return false;
+					Private message
+					{/* {messages
+					.filter(message => {
+						// console.log(filterVal);
+						if (searchMessage !== '') {
+							const regex = new RegExp(searchMessage, 'i');
+							if (regex.test(message.text) || regex.test(message.userName)) {
+								return true;
 							}
-							return true;
-						})
-						.map(message => {
-							return (
-								<Message key={message._id} {...message} firstname={firstname} />
-							);
-						})}
+							return false;
+						}
+						return true;
+					})
+					.map(message => {
+						return (
+							<Message key={message._id} {...message} firstname={firstname} />
+						);
+					})} */}
 				</ul>
 			</div>
 		);
@@ -121,4 +122,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, actions)(MessagesList);
+export default connect(mapStateToProps, actions)(PrivateMessagesList);

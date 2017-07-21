@@ -43,8 +43,9 @@ class AppContainer extends React.Component {
 							path="/chat"
 							render={() => {
 								var self = this;
-								return Protected(self.props, <Chats />, '/auth/login', true)} } />}
-						/>
+								return Protected(self.props, <Chats />, '/auth/login', true);
+							}}
+						/>} />
 						<Route path="/auth" component={AuthContainer} />
 						<Route path="/:params" component={PageNotFound} />
 					</Switch>
