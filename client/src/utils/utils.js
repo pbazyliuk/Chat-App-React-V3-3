@@ -3,18 +3,18 @@ export {
 	sendMessageWS,
 	initConnection,
 	addListener,
-	socket,
+	socketRoot,
 	disconnect,
 	sendChat
 };
 
-let socket;
+let socketRoot;
 let listeners = {};
 
 function initConnection(message) {
 	// console.error('SOCKET', socket);
 
-	if (!socket) {
+	if (!socketRoot) {
 		// console.error('New Socket');
 		connect();
 	}
@@ -26,10 +26,10 @@ function initConnection(message) {
 
 function connect() {
 	// console.log('ws connect');
-	socket = io('http://localhost:8090');
+	socketRoot = io('http://localhost:8090/root');
 
-	socket.on('connect', function() {
-		socket
+	socketRoot.on('connect', function() {
+		socketRoot
 			.on('authenticated', function() {
 				console.log('authenticated client');
 			})
@@ -83,19 +83,19 @@ function onLeave(username) {
 
 function disconnect() {
 	// socket.close();
-	socket.disconnect();
-	socket = null;
+	socketRoot.disconnect();
+	socketRoot = null;
 	listeners = {};
 }
 
 function send(message) {
 	console.log('send to server', message);
-	socket.emit('message', message);
+	socketRoot.emit('message', message);
 }
 
 function sendChat(chat) {
 	console.log('send to server chat', chat);
-	socket.emit('chat', chat);
+	socketRoot.emit('chat', chat);
 }
 
 function sendMessageWS(message) {

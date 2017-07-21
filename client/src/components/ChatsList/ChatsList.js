@@ -23,7 +23,7 @@ class ChatsList extends React.Component {
 
 		const userFirstname = user.get('firstname');
 
-		console.log('CHAT LIST', userFirstname);
+		console.log('CHAT LIST', chats);
 
 		return (
 			<ul

@@ -36,7 +36,8 @@ const config = require('./config');
 
 //Web Sockets goes here
 
-io.sockets
+io
+	.of('/root')
 	.on(
 		'connection',
 		socketioJwt.authorize({
@@ -50,7 +51,7 @@ io.sockets
 			err,
 			user
 		) {
-			io.emit(
+			io.of('/root').emit(
 				'join',
 				{
 					user: user.firstname,
@@ -108,7 +109,7 @@ io.sockets
 							Chat.create(obj, function(err, chat) {
 								if (err) return err;
 							});
-							io.emit('chat', {
+							io.of('/root').emit('chat', {
 								name: obj.name,
 								privateMessages: [],
 								usersIds: obj.usersIds,
@@ -131,7 +132,7 @@ io.sockets
 				if (err) return err;
 			});
 
-			io.emit('message', {
+			io.of('/root').emit('message', {
 				userId: message.userId,
 				text: message.text,
 				timestamp: message.timestamp,
@@ -146,7 +147,7 @@ io.sockets
 				err,
 				user
 			) {
-				return io.emit(
+				return io.of('/root').emit(
 					'leave',
 					{
 						user: user.firstname,
@@ -157,6 +158,30 @@ io.sockets
 			});
 		}
 	});
+
+
+
+
+	//Privatechat namespaces for socket.io
+io.of('/privatechat')
+  .on('connection', function(socket) {
+    console.log('ws room connection')
+    socket.on('room', function(room) {
+      console.log('user joined room', room)
+      socket.join(room);
+    });
+
+    socket.on('add-private-message', function(message, room) {
+      console.log('private message', message)
+      message.chatname = room;
+      io.of('/privatechat').in(room).emit('add-private-message', message);
+    });
+    
+    socket.on('disconnect', function(val) {
+      console.log('disconnect user from room')
+      socket.disconnect() 
+      })
+   });
 
 server.listen(port);
 console.log('server is listening on: ', port);
