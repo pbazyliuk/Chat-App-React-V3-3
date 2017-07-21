@@ -12,7 +12,7 @@ class Chat extends React.Component {
 		const { _id, name, usersNames } = this.props;
 		const usersNamesStr = usersNames.sort().join(', ');
 		return (
-			<Link to={`/chat/${_id}`} className={styles['chat-list__link']}>
+			<Link to={`/chat/${name}`} className={styles['chat-list__link']}>
 				<li className={styles['chat-list__item']}>
 					<div className={styles['avatar']}>
 						<img

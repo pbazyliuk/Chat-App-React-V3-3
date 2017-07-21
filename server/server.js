@@ -88,15 +88,39 @@ io.sockets
 
 			// console.log('chat', chat);
 
-			Chat.create(obj, function(err, msg) {
-				if (err) return err;
-			});
+			// Chat.create(obj, function(err, msg) {
+			// 	if (err) return err;
+			// });
 
-			io.emit('chat', {
-				name: obj.name,
-				privateMessages: [],
-				usersIds: obj.usersIds,
-				usersNames: obj.usersNames
+			Chat.find({ name: chat.chatName }).then(chatS => {
+				console.log('chatS', chatS);
+				if (chatS.length) {
+					return res
+						.status(422)
+						.send({ error: 'this chat name is already been taken' });
+				} else {
+					Chat.find({ usersNames: obj.usersNames }, function(err, chats) {
+						if (err)
+							return res.status(422).send({
+								error: 'these users have been already connected to private chat'
+							});
+						if (!chats.length) {
+							Chat.create(obj, function(err, chat) {
+								if (err) return err;
+							});
+							io.emit('chat', {
+								name: obj.name,
+								privateMessages: [],
+								usersIds: obj.usersIds,
+								usersNames: obj.usersNames
+							});
+						} else {
+							res.status(422).send({
+								error: 'these users have been already connected to private chat'
+							});
+						}
+					});
+				}
 			});
 		}
 
