@@ -30,21 +30,19 @@ class PrivateMessagesInput extends React.Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-
+		console.log(this.props.params.id);
 		let user = JSON.parse(localStorage.getItem('user'));
 		// user.message = this.state.message;
 		// user.timestamp = Date.now();
 
 		var obj = {};
-		obj.chatId = undefined;
+		// obj.chatName = this.props.params.id;
 		obj.userId = user._id;
 		obj.userName = user.firstname;
 		obj.text = this.state.message;
 		obj.timestamp = Date.now();
 
-		// console.log(obj);
-
-		ws.sendMessageWS(obj);
+		ws.initPrivateConnection(obj, this.props.params.id);
 		//this.props.sendMessage(obj);
 		this.clearInput();
 	}

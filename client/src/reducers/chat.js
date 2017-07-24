@@ -1,4 +1,8 @@
-import { ADD_CHAT, GET_ALL_CHATS } from '../actionsTypes/index.js';
+import {
+	ADD_CHAT,
+	GET_ALL_CHATS,
+	SEND_PRIVATE_MESSAGE
+} from '../actionsTypes/index.js';
 import { List } from 'immutable';
 
 export default function reducer(state = List([]), action) {
@@ -9,6 +13,15 @@ export default function reducer(state = List([]), action) {
 
 		case GET_ALL_CHATS: {
 			return List(action.payload);
+		}
+
+		case SEND_PRIVATE_MESSAGE: {
+			console.log('send private reducer');
+			console.log(state);
+
+			var chats = state.get(1);
+			console.log(chats);
+			return state;
 		}
 
 		default:

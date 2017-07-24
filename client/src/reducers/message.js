@@ -11,6 +11,8 @@ export default function reducer(state = List([]), action) {
 			console.log('Get Messages action');
 			return List(action.payload);
 		}
+
+	
 		default:
 			return state;
 	}

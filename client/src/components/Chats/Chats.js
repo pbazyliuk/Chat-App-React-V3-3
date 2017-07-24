@@ -9,9 +9,17 @@ import ChatsList from '../ChatsList/ChatsList';
 
 import MainChatsContainer from '../../containers/MainChatsContainer';
 
-// import * as actions from '../../actions/index';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-// import { connect } from 'react-redux';
+import CommonChatContainer from '../../containers/CommonChatContainer';
+
+import MessagesNavbar from '../MessagesNavbar/MessagesNavbar';
+import MessagesList from '../MessagesList/MessagesList';
+import MessagesInput from '../MessagesInput/MessagesInput';
+
+import * as actions from '../../actions/index';
+
+import { connect } from 'react-redux';
 
 import styles from './Chats.scss';
 
@@ -54,6 +62,7 @@ class Chats extends React.Component {
 			width: 'calc(100% - 108px)'
 		};
 
+		// const SocketComponent = cjatName === 'general' ? <WebSockets>
 		return (
 			<div className={styles['wrapper']}>
 				<WebSockets />
@@ -80,16 +89,22 @@ class Chats extends React.Component {
 				>
 					{/* <ChatsDetails /> */}
 					<MainChatsContainer />
+
+					{/* <MessagesNavbar />
+					<MessagesList />
+					<MessagesInput /> */}
 				</div>
 			</div>
 		);
 	}
 }
 
-// const mapStateToProps = state => {
-// 	return { messages: state.messages.get() };
-// };
+const mapStateToProps = state => {
+	return {
+		messages: state.messages.get()
+	};
+};
 
-export default Chats;
+// export default Chats;
 
-// export default connect(mapStateToProps, actions)(Chats);
+export default connect(mapStateToProps, actions)(Chats);

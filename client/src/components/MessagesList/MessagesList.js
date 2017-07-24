@@ -25,6 +25,7 @@ class MessagesList extends React.Component {
 	get messages() {
 		const { searchMessage, users, firstname } = this.props;
 		var { messages } = this.props;
+		let chatName = this.props.chatName;
 
 		console.log('MESSAGES before', messages);
 		console.log('USERS', users);
@@ -64,7 +65,7 @@ class MessagesList extends React.Component {
 		return (
 			<div>
 				<h2 className={styles['main-chat-header']}>
-					Wellcome to the Main Chat
+					Wellcome to the {chatName[0].toUpperCase() + chatName.slice(1)} Chat
 				</h2>
 				<ul className={styles['message-list']}>
 					{messages
@@ -117,7 +118,8 @@ const mapStateToProps = state => {
 		messages: [...state.messages],
 		searchMessage: state.search.get('searchMessageValue'),
 		users: [...state.users],
-		firstname: state.auth.getIn(['user', 'firstname'])
+		firstname: state.auth.getIn(['user', 'firstname']),
+		chatName: state.auth.get('chatName')
 	};
 };
 

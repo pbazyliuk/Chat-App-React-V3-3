@@ -1,8 +1,10 @@
 import React from 'react';
 
-import PrivateMessagesNavbar from '../components/PrivateMessagesNavbar/PrivateMessagesNavbar';
-import PrivateMessagesList from '../components/PrivateMessagesList/PrivateMessagesList';
-import PrivateMessagesInput from '../components/PrivateMessagesInput/PrivateMessagesInput';
+import MessagesNavbar from '../components/MessagesNavbar/MessagesNavbar';
+import MessagesList from '../components/MessagesList/MessagesList';
+import MessagesInput from '../components/MessagesInput/MessagesInput';
+
+import WebSocketsPrivate from '../containers/WebSocketsPrivate';
 
 class PrivateChatContainer extends React.Component {
 	constructor(props) {
@@ -10,13 +12,7 @@ class PrivateChatContainer extends React.Component {
 	}
 
 	render() {
-		return (
-			<div>
-				<PrivateMessagesNavbar />
-				<PrivateMessagesList />
-				<PrivateMessagesInput />
-			</div>
-		);
+		return <div>1</div>;
 	}
 }
 

@@ -159,29 +159,33 @@ io
 		}
 	});
 
+//Privatechat namespaces for socket.io
+io.of('/privatechat').on('connection', function(socket) {
+	console.log('ws room connection');
+	socket.on('room', function(room) {
+		console.log('user joined room', room);
+		socket.join(room);
+	});
 
+	socket.on('private-message', function(message, room) {
+		console.log('private message', message, room);
+		//message.chatname = room;
+		io.of('/privatechat').in(room).emit('private-message', message, room);
 
+		Chat.findOneAndUpdate(
+			{ name: room },
+			{ $push: { privateMessages: message } },
+			function(err, chat) {
+				if (err) return err;
+			}
+		);
+	});
 
-	//Privatechat namespaces for socket.io
-io.of('/privatechat')
-  .on('connection', function(socket) {
-    console.log('ws room connection')
-    socket.on('room', function(room) {
-      console.log('user joined room', room)
-      socket.join(room);
-    });
-
-    socket.on('add-private-message', function(message, room) {
-      console.log('private message', message)
-      message.chatname = room;
-      io.of('/privatechat').in(room).emit('add-private-message', message);
-    });
-    
-    socket.on('disconnect', function(val) {
-      console.log('disconnect user from room')
-      socket.disconnect() 
-      })
-   });
+	socket.on('disconnect', function(val) {
+		console.log('disconnect user from room');
+		socket.disconnect();
+	});
+});
 
 server.listen(port);
 console.log('server is listening on: ', port);

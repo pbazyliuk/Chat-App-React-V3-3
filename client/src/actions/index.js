@@ -16,7 +16,9 @@ import {
 	SEARCH_USER_VAL,
 	SAVE_AUTH_USER,
 	ADD_CHAT,
-	GET_ALL_CHATS
+	GET_ALL_CHATS,
+	SEND_PRIVATE_MESSAGE,
+	UPDATE_CHATNAME
 } from '../actionsTypes/index.js';
 
 const ROOT_URL = 'http://localhost:8090';
@@ -182,4 +184,15 @@ export function resetAddChatForm(name) {
 	return function(dispatch) {
 		dispatch(reset(name));
 	};
+}
+
+export function sendPrivateMessage(message, room) {
+	console.log('send private message action: ' + message + room);
+	return function(dispatch) {
+		dispatch({ type: SEND_PRIVATE_MESSAGE, payload: [message, room] });
+	};
+}
+
+export function updateChatname(params) {
+	dispatch({ type: UPDATE_CHATNAME, payload: params });
 }

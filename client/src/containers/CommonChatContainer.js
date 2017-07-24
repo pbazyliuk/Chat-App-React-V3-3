@@ -9,7 +9,13 @@ class CommonChatContainer extends React.Component {
 		super(props);
 	}
 
+	componentWillReceiveProps(newProps) {
+		console.log('CommonChatContainer', newProps);
+	}
+
 	render() {
+		// console.log('CommonChatContainer', this.props);
+
 		return (
 			<div>
 				<MessagesNavbar />

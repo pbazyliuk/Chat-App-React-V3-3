@@ -11,6 +11,9 @@ class WebSockets extends React.Component {
 
 	componentWillMount() {
 		const { user } = this.props;
+		const chatName = this.props.chatName;
+
+		console.log('wschatName, ', chatName);
 
 		if (user) {
 			const {
@@ -22,20 +25,25 @@ class WebSockets extends React.Component {
 				getAllChats,
 				addChat
 			} = this.props;
-			console.log(this.props);
+
 			console.error('COMPONENT WILL MOUNT');
 
-			ws.initConnection();
+			if (chatName === 'general') {
+				console.log('initConnection');
+				ws.initConnection();
 
-			ws.addListener('message', sendMessage);
-			ws.addListener('chat', addChat);
+				ws.addListener('message', sendMessage);
+				ws.addListener('chat', addChat);
 
-			ws.addListener('join', getAllUsers);
-			ws.addListener('join', getMessages);
-			ws.addListener('join', getAllChats);
+				ws.addListener('join', getAllUsers);
+				ws.addListener('join', getMessages);
+				ws.addListener('join', getAllChats);
 
-			ws.addListener('leave', getAllUsers);
-			ws.addListener('leave', getMessages);
+				ws.addListener('leave', getAllUsers);
+				ws.addListener('leave', getMessages);
+			} else {
+				ws.disconnect();
+			}
 		}
 	}
 
@@ -59,7 +67,7 @@ class WebSockets extends React.Component {
 }
 
 const mapStateToProps = state => {
-	return { user: state.auth.get('user') };
+	return { user: state.auth.get('user'), chatName: state.auth.get('chatName') };
 };
 
 export default connect(mapStateToProps, actions)(WebSockets);

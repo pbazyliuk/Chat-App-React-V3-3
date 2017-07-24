@@ -1,8 +1,13 @@
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR } from '../actionsTypes/index.js';
+import {
+	AUTH_USER,
+	UNAUTH_USER,
+	AUTH_ERROR,
+	UPDATE_CHATNAME
+} from '../actionsTypes/index.js';
 import { Map } from 'immutable';
 
 export default function(
-	state = Map({ user: null, authenticated: false, error: '' }),
+	state = Map({ user: null, authenticated: false, error: '', chatName: '' }),
 	action
 ) {
 	switch (action.type) {
@@ -14,7 +19,8 @@ export default function(
 			return state.merge({
 				authenticated: true,
 				user: Map(action.payload),
-				error: ''
+				error: '',
+				chatName: 'general'
 			});
 		}
 
@@ -22,12 +28,16 @@ export default function(
 			return state.merge({
 				user: null,
 				authenticated: false,
-				error: ''
+				error: '',
+				chatName: ''
 			});
 		}
 		case AUTH_ERROR:
-			return state.set("error", action.payload);
-			
+			return state.set('error', action.payload);
+
+		case UPDATE_CHATNAME:
+			return state.set('chatName', action.payload);
+
 		default:
 			return state;
 	}
